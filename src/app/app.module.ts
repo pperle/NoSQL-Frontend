@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './shared/material.module';
 import { CourseComponent } from './course/course.component';
-import { QuizComponent } from './quiz/quiz.component';
+import { QuizComponent } from './course/quiz/quiz.component';
 
 
 @NgModule({

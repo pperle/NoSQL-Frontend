@@ -1,12 +1,15 @@
 <div>
   <mat-card>
-    <mat-card *ngFor="let elem of [1, 2, 3, 4, 5, 6]">
-      <mat-card-title>Vorbemerkung und Einführung</mat-card-title>
-      <mat-card-content>
-        <p>Vorbemerkungen zu Vorlesung und dem Ablauf der Veranstaltung.</p>
-        <hr>
-        <p>File 01</p>
-      </mat-card-content>
-    </mat-card>
+    <mat-card-title>Kurs XYZ</mat-card-title>
+    <mat-card-content>
+      <mat-card *ngFor="let elem of [1, 2, 3, 4, 5, 6]">
+        <mat-card-title>Vorbemerkung und Einführung</mat-card-title>
+        <mat-card-content>
+          <p>Vorbemerkungen zu Vorlesung und dem Ablauf der Veranstaltung.</p>
+          <hr>
+          <p>File 01</p>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
   </mat-card>
 </div>

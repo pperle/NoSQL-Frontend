@@ -1,0 +1,19 @@
+<div>
+  <mat-card>
+    <mat-card-title>Quiz XYZ</mat-card-title>
+    <mat-card-content>
+      <mat-card *ngFor="let num of [1, 2, 3, 4, 5, 6, 7, 8, 9]">
+        <mat-card-title>Frage {{num}}</mat-card-title>
+        <mat-card-content>
+          <mat-radio-group>
+            <p>
+              <mat-radio-button value="1">Antwort 1</mat-radio-button>
+              <mat-radio-button value="2">Antwort 2</mat-radio-button>
+              <mat-radio-button value="3">Antwort 3</mat-radio-button>
+            </p>
+          </mat-radio-group>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>
