@@ -7,13 +7,17 @@ import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from './shared/material.module';
+import { CourseComponent } from './course/course.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    CourseComponent,
+    QuizComponent
   ],
   imports: [
     BrowserModule,

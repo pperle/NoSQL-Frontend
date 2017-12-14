@@ -13,3 +13,13 @@ body {
   right: 20px;
   color: white;
 }
+
+.outlet {
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  margin-top: 64px;
+  overflow-y: auto;
+  height: calc(100% - 64px);
+}
