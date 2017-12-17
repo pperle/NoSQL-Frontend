@@ -8,14 +8,42 @@ export enum UserLevel {
   PROFESSOR = 'PROFESSOR'
 }
 
+
 export interface Message {
   status: Status;
-  data: any;
+  data: Error | User | Course;
 }
 
-export interface LoginResult extends Message {
-  data: {
-    userId: number;
-    level: UserLevel;
-  };
+export interface Error {
+  message: string;
+}
+
+export class User {
+  id: number;
+  level: UserLevel;
+}
+
+export interface Course {
+  userId: number;
+  name: string;
+  topics?: Topic[];
+  tests?: Test[];
+}
+
+export interface Topic {
+  id: number;
+  name: string;
+  description: string;
+  files?: File[];
+}
+
+export interface Test {
+  id: number;
+  name: string;
+}
+
+export interface File {
+  id: number;
+  name: string;
+  link: string;
 }

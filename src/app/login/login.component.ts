@@ -3,7 +3,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { ErrorStateMatcher, MatSnackBar } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { Md5 } from 'ts-md5/dist/md5';
-import { LoginResult, Message, Status } from '../shared/RestResults';
+import { Message, Status, User } from '../shared/RestResults';
 import { Router } from '@angular/router';
 import { SessionDataManagerService } from '../shared/session-data-manager.service';
 
@@ -58,10 +58,10 @@ export class LoginComponent implements OnInit {
     ).subscribe((message: Message) => {
       console.log(message);
       if (message.status === Status.SUCCESS) {
-        this.sessionDataManagerService.user = (message as LoginResult).data;
+        this.sessionDataManagerService.user = message.data as User;
         this.router.navigate(['course']);
       } else {
-        this.snackBar.open(message.data.message, '', {
+        this.snackBar.open((message.data as Error).message, '', {
           duration: 3500,
         });
       }
