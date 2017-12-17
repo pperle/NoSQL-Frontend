@@ -24,7 +24,7 @@ export class User {
 }
 
 export interface Course {
-  userId: number;
+  id: number;
   name: string;
   topics?: Topic[];
   tests?: Test[];
