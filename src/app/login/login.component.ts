@@ -59,7 +59,8 @@ export class LoginComponent implements OnInit {
       console.log(message);
       if (message.status === Status.SUCCESS) {
         this.sessionDataManagerService.user = message.data as User;
-        this.router.navigate(['course']);
+        this.router.navigate(['course', 123]);
+        // this.router.navigate(['course', 123, 'quiz', 456]);
       } else {
         this.snackBar.open((message.data as Error).message, '', {
           duration: 3500,

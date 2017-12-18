@@ -1,5 +1,5 @@
 <div>
-  <mat-card>
+  <mat-card *ngIf="course">
     <mat-card-title>{{course.name}}</mat-card-title>
     <mat-card-content>
       <mat-card *ngFor="let topic of course.topics">

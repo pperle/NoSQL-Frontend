@@ -25,7 +25,7 @@ export class LoginGuard implements CanActivate {
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'course', component: CourseComponent, canActivate: [LoginGuard] },
-  { path: 'course/quiz', component: QuizComponent, canActivate: [LoginGuard] },
+  { path: 'course/:courseId', component: CourseComponent, canActivate: [LoginGuard] },
+  { path: 'course/:courseId/quiz/:quizId', component: QuizComponent, canActivate: [LoginGuard] },
   { path: '**', redirectTo: '/login' }
 ];
