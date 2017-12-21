@@ -25,12 +25,12 @@ export class LoginComponent implements OnInit {
 
   usernameFormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(3)
+    Validators.minLength(1)
   ]);
 
   passwordFormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(3)
+    Validators.minLength(1)
   ]);
 
   usernameMatcher = new MyErrorStateMatcher();
