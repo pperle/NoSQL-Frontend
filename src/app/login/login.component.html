@@ -17,7 +17,8 @@
       </mat-error>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" class="full-width" (click)="login(usernameFormControl.value, passwordFormControl.value)"
+    <button mat-raised-button color="primary" class="full-width"
+            (click)="login(usernameFormControl.value, passwordFormControl.value)"
             [disabled]="usernameFormControl.invalid || passwordFormControl.invalid">Login
     </button>
   </form>

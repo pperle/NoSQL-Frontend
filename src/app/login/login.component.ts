@@ -56,11 +56,9 @@ export class LoginComponent implements OnInit {
         password: Md5.hashStr(password)
       }
     ).subscribe((message: Message) => {
-      console.log(message);
       if (message.status === Status.SUCCESS) {
         this.sessionDataManagerService.user = message.data as User;
-        this.router.navigate(['course', 123]);
-        // this.router.navigate(['course', 123, 'quiz', 456]);
+        this.router.navigate(['course']);
       } else {
         this.snackBar.open((message.data as Error).message, '', {
           duration: 3500,
