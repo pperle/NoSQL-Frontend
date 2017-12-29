@@ -31,7 +31,8 @@ import { Ng2FloatBtnModule } from 'ng2-float-btn';
     MaterialModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    Ng2FloatBtnModule
   ],
   providers: [
     SessionDataManagerService,
