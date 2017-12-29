@@ -1,0 +1,36 @@
+<div>
+  <mat-card>
+    <mat-card-title>Bitte wähle einen Kurs aus</mat-card-title>
+    <mat-card-content>
+
+      <div *ngIf="courses">
+        <mat-card *ngFor="let course of courses">
+          <mat-card-title>{{course.name}}</mat-card-title>
+          <mat-card-content>
+            <p>more info ???</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+
+      <div *ngIf="!courses">
+        <mat-card>
+          <mat-card-title>Kein Kurs gefunden.</mat-card-title>
+          <mat-card-content>
+            <p>Du hast bisher noch keine Kurse.</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<span class="done"
+      *ngIf="this.sessionDataManagerService.user != null && this.sessionDataManagerService.user.level == 'PROFESSOR'"
+      (click)="addCourse()">
+    <button mat-fab>
+      <mat-icon>add circle</mat-icon>
+    </button>
+</span>

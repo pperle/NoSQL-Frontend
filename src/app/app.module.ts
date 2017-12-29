@@ -12,6 +12,8 @@ import { CourseComponent } from './course/course.component';
 import { QuizComponent } from './course/quiz/quiz.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SessionDataManagerService } from './shared/session-data-manager.service';
+import { SelectCourseComponent } from './select-course/select-course.component';
+import { Ng2FloatBtnModule } from 'ng2-float-btn';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { SessionDataManagerService } from './shared/session-data-manager.service
     AppComponent,
     LoginComponent,
     CourseComponent,
-    QuizComponent
+    QuizComponent,
+    SelectCourseComponent
   ],
   imports: [
     BrowserModule,
