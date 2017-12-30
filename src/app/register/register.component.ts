@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Bcrypt } from 'bcryptjs';
+import { getSalt, hash } from 'bcryptjs';
 import { MyErrorStateMatcher } from '../login/login.component';
 import { Validators, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -36,12 +36,7 @@ export class RegisterComponent {
 
 register(id: string, password: string) {
 
-    const newPassword = Bcrypt.getSalt(10, function(err, salt) {
-        if (err) {
-            throw err;
-        }
-        return Bcrypt.hash(password);
-    });
+    const newPassword = hash(password, getSalt('mySaltySalt'));
 
     this.http.post('http://localhost:3000/user/register/', {
         id: id,

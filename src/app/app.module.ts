@@ -15,7 +15,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { SessionDataManagerService } from './shared/session-data-manager.service';
 import { SelectCourseComponent } from './select-course/select-course.component';
 import { Ng2FloatBtnModule } from 'ng2-float-btn';
-import { Bcrypt } from 'bcryptjs';
 
 
 @NgModule({
@@ -35,8 +34,7 @@ import { Bcrypt } from 'bcryptjs';
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    Ng2FloatBtnModule,
-    Bcrypt
+    Ng2FloatBtnModule
   ],
   providers: [
     SessionDataManagerService,

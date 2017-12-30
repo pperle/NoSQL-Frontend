@@ -35,6 +35,7 @@
     "@angular/cli": "1.6.1",
     "@angular/compiler-cli": "^5.1.1",
     "@angular/language-service": "^5.1.1",
+    "@types/bcryptjs": "^2.4.1",
     "@types/jasmine": "~2.8.2",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.5.1",
