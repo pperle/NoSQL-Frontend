@@ -1,0 +1,26 @@
+<mat-card>
+    <form class="login-form">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Anmeldename" [formControl]="usernameFormControl"
+               [errorStateMatcher]="usernameMatcher">
+        <mat-error *ngIf="usernameFormControl.hasError('required')">
+          Anmeldename wird <strong>benötigt</strong>.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="full-width">
+        <input type="password" matInput placeholder="Kennwort" [formControl]="passwordFormControl"
+               [errorStateMatcher]="passwordMatcher" [type]="hidePassword ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+          Kennwort wird <strong>benötigt</strong>.
+        </mat-error>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" class="full-width"
+              (click)="register(usernameFormControl.value, passwordFormControl.value)"
+              [disabled]="usernameFormControl.invalid || passwordFormControl.invalid">Login
+      </button>
+    </form>
+  </mat-card>
+  

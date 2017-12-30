@@ -1,3 +1,4 @@
+import { RegisterComponent } from './register/register.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -14,12 +15,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { SessionDataManagerService } from './shared/session-data-manager.service';
 import { SelectCourseComponent } from './select-course/select-course.component';
 import { Ng2FloatBtnModule } from 'ng2-float-btn';
+import { Bcrypt } from 'bcryptjs';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     CourseComponent,
     QuizComponent,
     SelectCourseComponent
@@ -32,7 +35,8 @@ import { Ng2FloatBtnModule } from 'ng2-float-btn';
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    Ng2FloatBtnModule
+    Ng2FloatBtnModule,
+    Bcrypt
   ],
   providers: [
     SessionDataManagerService,

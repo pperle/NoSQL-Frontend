@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { SessionDataManagerService } from '../shared/session-data-manager.service';
 
 
-/** Error when invalid control is dirty, touched, or submitted. */
+/* Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -21,6 +21,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   usernameFormControl = new FormControl('', [
