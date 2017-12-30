@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { getSalt, hash } from 'bcryptjs';
+import { genSalt, hash } from 'bcryptjs';
 import { MyErrorStateMatcher } from '../login/login.component';
 import { Validators, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -35,20 +35,32 @@ export class RegisterComponent {
       }
 
 register(id: string, password: string) {
-
-    const newPassword = hash(password, getSalt('mySaltySalt'));
-
-    this.http.post('http://localhost:3000/user/register/', {
-        id: id,
-        password: newPassword
-      }).subscribe((message: Message) => {
-      if (message.status === Status.SUCCESS) {
-        this.router.navigate(['login']);
-      } else {
-        this.snackBar.open((message.data as Error).message, '', {
-          duration: 3500,
+        let newPassword;
+        genSalt(10, (err, salt) => {
+            if (err) {
+                console.log(err);
+                return;
+             }
+            hash(password, salt, (error, result) => {
+                if (error) {
+                    console.log(error);
+                    return;
+                 } else {
+                    newPassword = result;
+                    this.http.post('http://localhost:3000/user/register/', {
+                            id: id,
+                            password: newPassword
+                    }).subscribe((message: Message) => {
+                        if (message.status === Status.SUCCESS) {
+                            this.router.navigate(['login']);
+                        } else {
+                            this.snackBar.open((message.data as Error).message, '', {
+                            duration: 3500,
+                        });
+                    }
+                 });
+                 }
+            });
         });
-      }
-    });
   }
 }
