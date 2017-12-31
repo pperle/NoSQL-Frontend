@@ -1,10 +1,10 @@
 <div>
   <mat-card>
-    <mat-card-title>Bitte wähle einen Kurs aus</mat-card-title>
+    <mat-card-title (click)="redirectToCourse(2)">Bitte wähle einen Kurs aus</mat-card-title>
     <mat-card-content>
 
       <div *ngIf="courses">
-        <mat-card *ngFor="let course of courses">
+        <mat-card *ngFor="let course of courses; index as courseIndex" (click)="redirectToCourse(courseIndex)">
           <mat-card-title>{{course.name}}</mat-card-title>
           <mat-card-content>
             <p>more info ???</p>

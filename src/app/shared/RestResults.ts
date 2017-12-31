@@ -11,7 +11,7 @@ export enum UserLevel {
 
 export interface Message {
   status: Status;
-  data: Error | User | Course | Quiz;
+  data: Error | User | Course | Course[] | Quiz;
 }
 
 export interface Error {
