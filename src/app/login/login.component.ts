@@ -6,7 +6,6 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { Message, Status, User } from '../shared/RestResults';
 import { Router } from '@angular/router';
 import { SessionDataManagerService } from '../shared/session-data-manager.service';
-import { compare, genSalt, hash } from 'bcryptjs';
 
 
 /* Error when invalid control is dirty, touched, or submitted. */
@@ -52,25 +51,10 @@ export class LoginComponent implements OnInit {
 
 
   login(username: string, password: string) {
-    let newPassword;
-    genSalt(10, function(err, salt) {
-      if (err) {
-        console.log(err);
-      } else {
-        hash(password, salt, function(error, result) {
-          if (error) {
-            console.log(error);
-            return;
-          }
-          newPassword = result;
-        });
-      }
-    });
-
-    this.http.post('http://localhost:3000/login',
+      this.http.post('http://localhost:3000/login',
       {
         username: username,
-        password: newPassword
+        password: Md5.hashStr(password)
       }
     ).subscribe((message: Message) => {
       if (message.status === Status.SUCCESS) {
