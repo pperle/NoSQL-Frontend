@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SessionDataManagerService } from './shared/session-data-manager.service';
 import { SelectCourseComponent } from './select-course/select-course.component';
 import { Ng2FloatBtnModule } from 'ng2-float-btn';
+import { AddCourseComponent } from './course/add-course/add-course.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { Ng2FloatBtnModule } from 'ng2-float-btn';
     LoginComponent,
     CourseComponent,
     QuizComponent,
-    SelectCourseComponent
+    SelectCourseComponent,
+    AddCourseComponent
   ],
   imports: [
     BrowserModule,

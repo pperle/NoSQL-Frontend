@@ -2,7 +2,12 @@ mat-card {
   margin: 2em auto;
 }
 
+.done {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
 .full-width {
   width: 100%;
 }
-

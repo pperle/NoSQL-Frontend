@@ -31,30 +31,6 @@ export class CourseComponent implements OnInit, OnDestroy {
       this.loadCourseFromBackend(params.courseId);
     });
 
-    this.mainButton = {
-      color: 'primary',
-      iconName: 'add'
-    };
-
-    this.buttons = [
-      {
-        color: 'primary',
-        iconName: 'note',
-        onClick: () => {
-          alert('Jemand sollte ein neues Thema anlegen.');
-        },
-        label: 'Thema'
-      },
-      {
-        color: 'primary',
-        iconName: 'assignment',
-        onClick: () => {
-          alert('Jemand sollte einen neuen Test anlegen.');
-        },
-        label: 'Test'
-      }
-    ];
-
   }
 
   private loadCourseFromBackend(courseId: string) {
@@ -79,20 +55,4 @@ export class CourseComponent implements OnInit, OnDestroy {
     }
   }
 
-  onUpdateCourseName($event) {
-    console.log($event.target.value);
-
-  }
-
-  onUpdateTopicTitle($event, topicIndex: number) {
-    console.log($event.target.value, topicIndex);
-  }
-
-  onUpdateTopicDescription($event, topicIndex: number) {
-    console.log($event.target.value, topicIndex);
-  }
-
-  onDeleteTopic(topicIndex: number) {
-    console.log('Delete', topicIndex);
-  }
 }

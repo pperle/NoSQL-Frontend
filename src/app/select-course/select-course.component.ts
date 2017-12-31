@@ -34,10 +34,10 @@ export class SelectCourseComponent implements OnInit {
 
   addCourse() {
     // TODO create course in backend, return courseId for naviagtion
-    this.router.navigate(['course', 'NoSQL']);
+    this.router.navigate(['courses', 'NoSQL']);
   }
 
   redirectToCourse(index: number) {
-    this.router.navigate(['course', this.courses[index].name]);
+    this.router.navigate(['courses', this.courses[index].name]);
   }
 }

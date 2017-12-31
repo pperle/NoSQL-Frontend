@@ -5,6 +5,7 @@ import { QuizComponent } from './course/quiz/quiz.component';
 import { SessionDataManagerService } from './shared/session-data-manager.service';
 import { Injectable } from '@angular/core';
 import { SelectCourseComponent } from './select-course/select-course.component';
+import { AddCourseComponent } from './course/add-course/add-course.component';
 
 @Injectable()
 export class LoginGuard implements CanActivate {
@@ -26,8 +27,9 @@ export class LoginGuard implements CanActivate {
 export const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'course', component: SelectCourseComponent, canActivate: [LoginGuard]},
-  {path: 'course/:courseId', component: CourseComponent, canActivate: [LoginGuard]},
-  {path: 'course/:courseId/quiz/:quizId', component: QuizComponent, canActivate: [LoginGuard]},
+  {path: 'courses', component: SelectCourseComponent, canActivate: [LoginGuard]},
+  {path: 'courses/add', component: AddCourseComponent, canActivate: [LoginGuard]},
+  {path: 'courses/:courseId', component: CourseComponent, canActivate: [LoginGuard]},
+  {path: 'courses/:courseId/quizes/:quizId', component: QuizComponent, canActivate: [LoginGuard]},
   {path: '**', redirectTo: '/login'}
 ];
