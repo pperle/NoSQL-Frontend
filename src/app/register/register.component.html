@@ -1,36 +1,38 @@
 <mat-card>
-    <form class="login-form">
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Anmeldename" [formControl]="usernameFormControl"
-               [errorStateMatcher]="usernameMatcher">
-        <mat-error *ngIf="usernameFormControl.hasError('required')">
-          Anmeldename wird <strong>benötigt</strong>.
-        </mat-error>
-      </mat-form-field>
-  
-      <mat-form-field class="full-width">
-        <input type="password" matInput placeholder="Kennwort" [formControl]="passwordFormControl"
-               [errorStateMatcher]="passwordMatcher" [type]="hidePassword ? 'password' : 'text'">
-        <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-        <mat-error *ngIf="passwordFormControl.hasError('required')">
-          Kennwort wird <strong>benötigt</strong>.
-        </mat-error>
-      </mat-form-field>
+  <form class="login-form">
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Anmeldename" [formControl]="usernameFormControl"
+             [errorStateMatcher]="usernameMatcher">
+      <mat-error *ngIf="usernameFormControl.hasError('required')">
+        Anmeldename wird <strong>benötigt</strong>.
+      </mat-error>
+      <mat-error *ngIf="usernameFormControl.hasError('minlength')">
+        Anmeldename muss mindestens <strong>7</strong> Stellen haben.
+      </mat-error>
+    </mat-form-field>
 
-      <mat-form-field class="full-width">
-          <mat-radio-group [formControl]="userLevelFormControl" [errorStateMatcher]="userLevelMatcher">
-              <mat-radio-button aria-selected="true" value="STUDENT">Student</mat-radio-button>
-              <mat-radio-button value="ADMIN">Admin</mat-radio-button>
-            </mat-radio-group>
-        <mat-error *ngIf="userLevelFormControl.hasError('required')">
-          UserLevel wird <strong>benötigt</strong>.
-        </mat-error>
-      </mat-form-field>
-  
-      <button mat-raised-button color="primary" class="full-width"
-              (click)="register(usernameFormControl.value, passwordFormControl.value)"
-              [disabled]="usernameFormControl.invalid || passwordFormControl.invalid || userLevelFormControl.invalid">Register
-      </button>
-    </form>
-  </mat-card>
-  
+    <mat-form-field class="full-width">
+      <input type="password" matInput placeholder="Kennwort" [formControl]="passwordFormControl"
+             [errorStateMatcher]="passwordMatcher" [type]="hidePassword ? 'password' : 'text'">
+      <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      <mat-error *ngIf="passwordFormControl.hasError('required')">
+        Kennwort wird <strong>benötigt</strong>.
+      </mat-error>
+      <mat-error *ngIf="usernameFormControl.hasError('minlength')">
+        Anmeldename muss mindestens <strong>3</strong> Stellen haben.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-radio-group [(ngModel)]="userLevel" name="UserLevel">
+      <mat-radio-button value="STUDENT">Student</mat-radio-button>
+      <mat-radio-button value="PROFESSOR">Professor</mat-radio-button>
+    </mat-radio-group>
+
+    <button mat-raised-button color="primary" class="full-width"
+            style="margin-top: 15px;"
+            (click)="register(usernameFormControl.value, passwordFormControl.value)"
+            [disabled]="usernameFormControl.invalid || passwordFormControl.invalid">
+      Register
+    </button>
+  </form>
+</mat-card>
