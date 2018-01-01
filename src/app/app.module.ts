@@ -1,3 +1,4 @@
+import { RegisterComponent } from './register/register.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -21,6 +22,7 @@ import { AddCourseComponent } from './course/add-course/add-course.component';
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     CourseComponent,
     QuizComponent,
     SelectCourseComponent,
