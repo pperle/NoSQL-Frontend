@@ -19,7 +19,7 @@ export interface Error {
 }
 
 export class User {
-  id: number;
+  _id: string;
   level: UserLevel;
 }
 
