@@ -11,3 +11,7 @@ mat-card {
 .full-width {
   width: 100%;
 }
+
+.small-width {
+  width: 20%;
+}
