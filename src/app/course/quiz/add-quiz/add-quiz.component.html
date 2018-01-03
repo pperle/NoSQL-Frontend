@@ -1,0 +1,40 @@
+<div>
+    <mat-card *ngIf="course">
+      <mat-card-title>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Kursname" [(ngModel)]="course.name" (change)="onUpdateCourseName($event)">
+        </mat-form-field>
+      </mat-card-title>
+      <mat-card-content>
+        <mat-card *ngFor="let topic of course.topics; index as topicIndex">
+          <mat-card-title>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Titel" [(ngModel)]="topic.name"
+                     (change)="onUpdateTopicTitle($event, topicIndex)">
+            </mat-form-field>
+          </mat-card-title>
+          <mat-card-content>
+            <mat-form-field class="full-width">
+              <textarea matInput placeholder="Beschreibung" [(ngModel)]="topic.description"
+                        (change)="onUpdateTopicDescription($event, topicIndex)"></textarea>
+            </mat-form-field>
+            <hr>
+
+            <p>File 01</p>
+          </mat-card-content>
+          <div style="height: 56px">
+            <button mat-fab style="left: 100%; position: sticky;" (click)="onDeleteTopic(topicIndex)">
+              <mat-icon>delete circle</mat-icon>
+            </button>
+          </div>
+  
+        </mat-card>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  
+  <span class="done">
+    <ng2-float-btn [mainButton]="mainButton" [buttons]="buttons" [isMini]="true" [direction]="'up'"></ng2-float-btn>
+  </span>
+  
