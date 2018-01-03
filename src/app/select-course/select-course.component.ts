@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SessionDataManagerService } from '../shared/session-data-manager.service';
 import { Router } from '@angular/router';
 import { Course, Message, Status, UserLevel } from '../shared/RestResults';
-import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
+import { HttpLoginService } from '../shared/services/http-login.service';
 
 @Component({
   selector: 'app-select-course',
@@ -15,12 +15,12 @@ export class SelectCourseComponent implements OnInit {
 
   constructor(private sessionDataManagerService: SessionDataManagerService,
               private snackBar: MatSnackBar,
-              private http: HttpClient,
+              private http: HttpLoginService,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.http.get('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/courses/all/list')
+    this.http.get('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/courses')
       .subscribe((message: Message) => {
         if (message.status === Status.SUCCESS) {
           this.courses = message.data as Course[];

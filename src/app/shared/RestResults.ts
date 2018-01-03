@@ -21,6 +21,7 @@ export interface Error {
 export class User {
   _id: string;
   level: UserLevel;
+  token: string;
 }
 
 export interface Course {

@@ -3,8 +3,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 import { Message, Quiz, Status } from '../../../shared/RestResults';
 import { SessionDataManagerService } from '../../../shared/session-data-manager.service';
-import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
+import { HttpLoginService } from '../../../shared/services/http-login.service';
 
 @Component({
   selector: 'app-quiz',
@@ -18,7 +18,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   constructor(private sessionDataManagerService: SessionDataManagerService,
               private snackBar: MatSnackBar,
-              private http: HttpClient,
+              private http: HttpLoginService,
               private route: ActivatedRoute) {
   }
 

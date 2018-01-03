@@ -16,6 +16,7 @@ import { SessionDataManagerService } from './shared/session-data-manager.service
 import { SelectCourseComponent } from './select-course/select-course.component';
 import { Ng2FloatBtnModule } from 'ng2-float-btn';
 import { AddCourseComponent } from './course/add-course/add-course.component';
+import { HttpLoginService } from './shared/services/http-login.service';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { AddCourseComponent } from './course/add-course/add-course.component';
   ],
   providers: [
     SessionDataManagerService,
-    LoginGuard
+    LoginGuard,
+    HttpLoginService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { SessionDataManagerService } from '../shared/session-data-manager.service';
 import { Course, Message, Status } from '../shared/RestResults';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Ng2FloatBtn } from 'ng2-float-btn';
+import { HttpLoginService } from '../shared/services/http-login.service';
 
 @Component({
   selector: 'app-course',
@@ -22,7 +22,7 @@ export class CourseComponent implements OnInit, OnDestroy {
 
   constructor(private sessionDataManagerService: SessionDataManagerService,
               private snackBar: MatSnackBar,
-              private http: HttpClient,
+              private http: HttpLoginService,
               private route: ActivatedRoute) {
   }
 
