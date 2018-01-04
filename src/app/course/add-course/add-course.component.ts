@@ -139,4 +139,7 @@ export class AddCourseComponent implements OnInit {
     this.questions[questionIndex].name = $event.target.value;
   }
 
+  openAddQuestionDialog() {
+    this.dialog.open(AddQuizDialogComponent);
+  }
 }

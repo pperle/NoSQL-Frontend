@@ -18,6 +18,7 @@ import { SelectCourseComponent } from './select-course/select-course.component';
 import { Ng2FloatBtnModule } from 'ng2-float-btn';
 import { AddCourseComponent } from './course/add-course/add-course.component';
 import { HttpLoginService } from './shared/services/http-login.service';
+import { AddQuestionDialogComponent } from './course/quiz/add-question-dialog/add-question-dialog.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { HttpLoginService } from './shared/services/http-login.service';
     QuizComponent,
     SelectCourseComponent,
     AddCourseComponent,
-    AddQuizDialogComponent
+    AddQuizDialogComponent,
+    AddQuestionDialogComponent
   ],
   imports: [
     BrowserModule,
