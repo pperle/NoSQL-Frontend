@@ -44,8 +44,7 @@ import { HttpLoginService } from './shared/services/http-login.service';
   providers: [
     SessionDataManagerService,
     LoginGuard,
-    HttpLoginService,
-    AddQuizDialogComponent
+    HttpLoginService
   ],
   bootstrap: [AppComponent]
 })
