@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './shared/material.module';
 import { CourseComponent } from './course/course.component';
 import { QuizComponent } from './course/quiz/quiz.component';
+import { AddQuizDialogComponent } from './course/quiz/add-quiz/add-quiz-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SessionDataManagerService } from './shared/session-data-manager.service';
 import { SelectCourseComponent } from './select-course/select-course.component';
@@ -27,7 +28,8 @@ import { HttpLoginService } from './shared/services/http-login.service';
     CourseComponent,
     QuizComponent,
     SelectCourseComponent,
-    AddCourseComponent
+    AddCourseComponent,
+    AddQuizDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import { HttpLoginService } from './shared/services/http-login.service';
   providers: [
     SessionDataManagerService,
     LoginGuard,
-    HttpLoginService
+    HttpLoginService,
+    AddQuizDialogComponent
   ],
   bootstrap: [AppComponent]
 })

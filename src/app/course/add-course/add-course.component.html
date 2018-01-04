@@ -19,7 +19,7 @@
                       (change)="onUpdateTopicDescription($event, topicIndex)"></textarea>
           </mat-form-field>
           <mat-list>
-              <mat-list-item *ngFor="let file of topic.files">
+              <mat-list-item *ngFor="let file of topic.files; index as fileIndex">
                   <button mat-button (click)="onDeleteFile(topicIndex, fileIndex)">{{ file.name }}
                       <mat-icon>close</mat-icon>
                   </button>
@@ -51,6 +51,61 @@
         </div>
 
       </mat-card>
+          <mat-card *ngIf="course.tests">
+            <mat-card-title>
+                Tests für den Kurs: {{ course.name }}
+            </mat-card-title>
+            <mat-card-content>
+                <mat-list>
+                    <mat-list-item *ngFor="let quiz of course.tests; index as testIndex">
+                        <button mat-button (click)="onDeleteTest(testIndex)">{{ quiz.name }}
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-list-item>
+                  </mat-list>
+                  <button mat-button href="./../quiz/add-quiz/add-quiz-dialog.component.html" 
+                          data-toggle="modal" data-target="#quizModal">
+                      Add Quiz
+                    </button>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Quiz Modal -->
+
+          <mat-card>
+              <div id="quizModal">
+                  <h1 matDialogTitle>Title</h1>
+                  
+                  <mat-dialog-content>
+                      <mat-card *ngFor="let question of quiz.questions; index as questionIndex">
+                          <mat-card-title>
+                            <mat-form-field class="full-width">
+                              <input matInput placeholder="Titel" [(ngModel)]="question.question"
+                                     (change)="onUpdateQuizTitle($event, questionIndex)">
+                            </mat-form-field>
+                          </mat-card-title>
+                          <mat-card-content>
+                            <section>
+                              <!--
+                                <mat-checkbox *ngFor="let answer of question.answers">
+                                  <input matInput placeholder="answer" [(ngModel)]="answer" (change)="onUpdateAnswer($event)">
+                              </mat-checkbox> 
+                            -->
+                            </section>
+                          </mat-card-content>
+                          <button mat-raised-button>
+                              <mat-icon>open</mat-icon>  
+                              Frage hinzufügen
+                            </button>
+                        </mat-card>
+                  </mat-dialog-content>
+                  
+                  <mat-dialog-actions>
+                      <button mat-button matDialogClose>Close dialog</button>
+                      <button mat-button>Action</button>
+                  </mat-dialog-actions>
+              </div>
+          </mat-card>
     </mat-card-content>
   </mat-card>
 </div>

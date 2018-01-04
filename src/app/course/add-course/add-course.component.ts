@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Course } from '../../shared/RestResults';
+import { Course, Question } from '../../shared/RestResults';
 import { Ng2FloatBtn } from 'ng2-float-btn';
+import { Router } from '@angular/router';
+import { AddQuizDialogComponent } from './../quiz/add-quiz/add-quiz-dialog.component';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { SessionDataManagerService } from '../../shared/session-data-manager.service';
 
 @Component({
   selector: 'app-add-course',
@@ -16,6 +20,13 @@ export class AddCourseComponent implements OnInit {
   currentTopicId = 1;
   newFileName = '';
 
+  questions: Question = {
+    question: 'firstquestion',
+    answers: [
+      'Hallo', 'GT'
+    ]
+  };
+
   course: Course = {
     id: 1,
     name: '',
@@ -27,10 +38,22 @@ export class AddCourseComponent implements OnInit {
         files: []
       }
     ],
-    tests: []
+    tests: [
+      {
+      id: this.currentTestId++,
+      name: 'bonobo',
+      questions: [{
+        question: 'firstquestion',
+        answers: [
+          'Hallo', 'GT'
+        ]
+      }]
+    }
+  ]
   };
 
-  constructor() {
+  constructor(private router: Router,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -58,9 +81,8 @@ export class AddCourseComponent implements OnInit {
         color: 'primary',
         iconName: 'assignment',
         onClick: () => {
-          alert('Jemand sollte einen neuen Test anlegen.');
         },
-        label: 'Test'
+        label: 'Test',
       },
       {
         color: 'primary',
@@ -109,13 +131,12 @@ export class AddCourseComponent implements OnInit {
     this.course.topics[topicIndex].files.splice(fileIndex, 1);
   }
 
-  onAddTest() {
-    // TODO redirect to add quiz which should be opened by modal
-    // OR just open a modal
-  }
-
   onDeleteTest(testIndex: number) {
     this.course.tests.splice(testIndex, 1);
+  }
+
+  onUpdateQuizTitle($event, questionIndex: number) {
+    this.questions[questionIndex].name = $event.target.value;
   }
 
 }

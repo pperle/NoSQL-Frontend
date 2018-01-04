@@ -3,6 +3,7 @@ import { CanActivate, Router, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { CourseComponent } from './course/course.component';
 import { QuizComponent } from './course/quiz/quiz.component';
+import { AddQuizDialogComponent } from './course/quiz/add-quiz/add-quiz-dialog.component';
 import { SessionDataManagerService } from './shared/session-data-manager.service';
 import { Injectable } from '@angular/core';
 import { SelectCourseComponent } from './select-course/select-course.component';
@@ -32,6 +33,7 @@ export const routes: Routes = [
   {path: 'courses', component: SelectCourseComponent, canActivate: [LoginGuard]},
   {path: 'courses/add', component: AddCourseComponent, canActivate: [LoginGuard]},
   {path: 'courses/:courseId', component: CourseComponent, canActivate: [LoginGuard]},
+  {path: 'courses/:courseId/quizes/add', component: AddQuizDialogComponent, canActivate: [LoginGuard]},
   {path: 'courses/:courseId/quizes/:quizId', component: QuizComponent, canActivate: [LoginGuard]},
   {path: '**', redirectTo: '/login'}
 ];
