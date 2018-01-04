@@ -35,7 +35,7 @@ export class CourseComponent implements OnInit, OnDestroy {
 
   private loadCourseFromBackend(courseId: string) {
     // this.http.get('http://localhost:3000/user/' + this.sessionDataManagerService.user.id + '/course/' + courseId)
-    this.http.get('http://localhost:3000/users/' + 1 + '/courses/' + courseId)
+    this.http.get('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/courses/' + courseId)
       .subscribe((message: Message) => {
 
         if (message.status === Status.SUCCESS) {
