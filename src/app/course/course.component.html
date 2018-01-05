@@ -7,7 +7,9 @@
         <mat-card-content>
           <p>{{topic.description}}</p>
           <hr>
-          <p>File 01</p>
+          <div *ngFor="let file of topic.files;">
+            <a href="http://localhost:3000/users/{{this.sessionDataManagerService.user._id}}/courses/{{course._id}}/files/{{file._id}}/token/{{this.sessionDataManagerService.user.token}}">{{file.name}}</a>
+          </div>
         </mat-card-content>
       </mat-card>
     </mat-card-content>
