@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SessionDataManagerService } from '../shared/session-data-manager.service';
 import { Course, Message, Status } from '../shared/RestResults';
 import { MatSnackBar } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Ng2FloatBtn } from 'ng2-float-btn';
 import { HttpLoginService } from '../shared/services/http-login.service';
@@ -23,7 +23,8 @@ export class CourseComponent implements OnInit, OnDestroy {
   constructor(private sessionDataManagerService: SessionDataManagerService,
               private snackBar: MatSnackBar,
               private http: HttpLoginService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -47,6 +48,10 @@ export class CourseComponent implements OnInit, OnDestroy {
           });
         }
       });
+  }
+
+  private loadQuiz(quizId: string) {
+     this.router.navigate(['users', this.sessionDataManagerService.user._id, 'quizs', quizId]);
   }
 
   ngOnDestroy(): void {

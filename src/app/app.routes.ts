@@ -34,6 +34,6 @@ export const routes: Routes = [
   {path: 'courses/add', component: AddCourseComponent, canActivate: [LoginGuard]},
   {path: 'courses/:courseId', component: CourseComponent, canActivate: [LoginGuard]},
   {path: 'courses/:courseId/quizes/add', component: AddQuizDialogComponent, canActivate: [LoginGuard]},
-  {path: 'courses/:courseId/quizes/:quizId', component: QuizComponent, canActivate: [LoginGuard]},
+  {path: 'users/:userId/quizs/:quizId', component: QuizComponent, canActivate: [LoginGuard]},
   {path: '**', redirectTo: '/login'}
 ];

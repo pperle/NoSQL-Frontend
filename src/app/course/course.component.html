@@ -7,9 +7,20 @@
         <mat-card-content>
           <p>{{topic.description}}</p>
           <hr>
-          <div *ngFor="let file of topic.files;">
-            <a href="http://localhost:3000/users/{{this.sessionDataManagerService.user._id}}/courses/{{course._id}}/files/{{file._id}}/token/{{this.sessionDataManagerService.user.token}}">{{file.name}}</a>
+          <div *ngIf="topic.files.length > 0">
+            <div *ngFor="let file of topic.files;">
+              <a href="http://localhost:3000/users/{{this.sessionDataManagerService.user._id}}/courses/{{course._id}}/files/{{file._id}}/token/{{this.sessionDataManagerService.user.token}}">{{file.name}}</a>
+            </div>
           </div>
+          <div *ngIf="topic.files.length == 0">
+            <p>Dieses Thema enthält keine Dateien</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card *ngFor="let quiz of course.quizs">
+        <mat-card-title>{{quiz.name}}</mat-card-title>
+        <mat-card-content>
+          <a class = "clickable" (click)="loadQuiz(quiz._id)">Test starten</a>
         </mat-card-content>
       </mat-card>
     </mat-card-content>

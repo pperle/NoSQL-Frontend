@@ -32,7 +32,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   private loadQuizFromBackend(courseId: string, quizId: string) {
-    this.http.get('http://localhost:3000/user/' + this.sessionDataManagerService.user._id + '/course/' + courseId + '/quiz/' + quizId)
+    this.http.get('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/quizs/' + quizId)
       .subscribe((message: Message) => {
 
         if (message.status === Status.SUCCESS) {
