@@ -33,14 +33,14 @@
         </mat-form-field>
       </mat-card-title>
       <mat-card-content>
-        <div *ngFor="let answer of question.possibleAnwsers; index as answerIndex">
+        <span *ngFor="let answer of question.possibleAnwsers; index as answerIndex">
           <mat-checkbox (change)="onUpdateChecked($event, questionIndex, answerIndex)">
             <mat-form-field>
               <input class="answerText" matInput placeholder="Antwort" [ngModel]="answer"
                      (change)="onUpdateAnswer($event, questionIndex, answerIndex)">
             </mat-form-field>
           </mat-checkbox>
-        </div>
+        </span>
       </mat-card-content>
     </mat-card>
 

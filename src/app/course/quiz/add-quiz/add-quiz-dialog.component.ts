@@ -22,7 +22,7 @@ export class AddQuizDialogComponent implements OnInit {
       visibilityEndDate: null,
       questions: [{
         questionText: '',
-        possibleAnwsers: ['Anwort 1', 'Anwort 2', 'Anwort 3', 'Anwort 4'],
+        possibleAnwsers: ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
         correctAnwsers: []
       }]
     };
@@ -45,7 +45,7 @@ export class AddQuizDialogComponent implements OnInit {
   addQuestion() {
     this.quiz.questions.push({
       questionText: '',
-      possibleAnwsers: ['Anwort 1', 'Anwort 2', 'Anwort 3', 'Anwort 4'],
+      possibleAnwsers: ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
       correctAnwsers: []
     });
   }
