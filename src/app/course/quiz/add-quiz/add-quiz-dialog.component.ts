@@ -1,8 +1,6 @@
 import { NewQuiz } from './../../../shared/RestResults';
 import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDatepickerInputEvent } from '@angular/material';
-import { decode } from '@angular/router/src/url_tree';
-import { forEach } from '@angular/router/src/utils/collection';
+import { MAT_DIALOG_DATA, MatDatepickerInputEvent, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-add-quiz-dialog',
@@ -14,7 +12,7 @@ export class AddQuizDialogComponent implements OnInit {
   quiz: NewQuiz;
 
   constructor(@Optional() @Inject(MAT_DIALOG_DATA) private dialogData: any,
-    private matDilogRef: MatDialogRef<AddQuizDialogComponent>) {
+              private matDialogRef: MatDialogRef<AddQuizDialogComponent>) {
   }
 
   ngOnInit() {
@@ -24,7 +22,7 @@ export class AddQuizDialogComponent implements OnInit {
       visibilityEndDate: null,
       questions: [{
         questionText: '',
-        possibleAnwsers: ['', '', '', ''],
+        possibleAnwsers: ['Anwort 1', 'Anwort 2', 'Anwort 3', 'Anwort 4'],
         correctAnwsers: []
       }]
     };
@@ -34,24 +32,26 @@ export class AddQuizDialogComponent implements OnInit {
     this.quiz.name = $event.target.value;
   }
 
-  onUpdateQuestion($event, questionIndex) {
+  onUpdateQuestion($event, questionIndex: number) {
     this.quiz.questions[questionIndex].questionText = $event.target.value;
   }
 
-  onUpdateAnswer($event, answerIndex, questionIndex) {
+  onUpdateAnswer($event, questionIndex: number, answerIndex: number) {
+    console.log(answerIndex);
     this.quiz.questions[questionIndex].possibleAnwsers[answerIndex] = $event.target.value;
+    console.log(this.quiz.questions[questionIndex].possibleAnwsers);
   }
 
   addQuestion() {
     this.quiz.questions.push({
       questionText: '',
-      possibleAnwsers: ['', '', '', ''],
+      possibleAnwsers: ['Anwort 1', 'Anwort 2', 'Anwort 3', 'Anwort 4'],
       correctAnwsers: []
     });
   }
 
   public onSave() {
-    this.matDilogRef.close(this.quiz);
+    this.matDialogRef.close(this.quiz);
   }
 
   onUpdateVisibilityStartDate(event: MatDatepickerInputEvent<Date>) {
@@ -85,20 +85,20 @@ export class AddQuizDialogComponent implements OnInit {
     }
   }
 
-  onUpdateChecked($event, answerIndex: number, questionIndex: number) {
-      if ($event.checked) {
-        console.log(answerIndex);
-        this.quiz.questions[questionIndex].correctAnwsers.push(answerIndex);
-      } else if ($event.checked === false) {
-        const ca = this.quiz.questions[questionIndex].correctAnwsers;
-        let actualIndex = 0;
-        for (let i = 0; i < ca.length; i++) {
-          if (ca[i] === answerIndex) {
-            actualIndex = i;
-          }
+  onUpdateChecked($event, questionIndex: number, answerIndex: number, ) {
+    if ($event.checked) {
+      console.log(answerIndex);
+      this.quiz.questions[questionIndex].correctAnwsers.push(answerIndex);
+    } else if ($event.checked === false) {
+      const ca = this.quiz.questions[questionIndex].correctAnwsers;
+      let actualIndex = 0;
+      for (let i = 0; i < ca.length; i++) {
+        if (ca[i] === answerIndex) {
+          actualIndex = i;
         }
-        this.quiz.questions[questionIndex].correctAnwsers.splice(actualIndex, 1);
       }
+      this.quiz.questions[questionIndex].correctAnwsers.splice(actualIndex, 1);
+    }
   }
 
 }

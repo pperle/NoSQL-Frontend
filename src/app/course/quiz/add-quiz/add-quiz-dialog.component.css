@@ -1,15 +1,20 @@
 .full-width {
-    width: 100%;
+  width: 100%;
 }
 
 mat-card {
-    margin: 2em auto;
-  }
-
-.answerText{
-    margin-left: 0.5em;
+  margin: 2em auto;
 }
 
-.addButton{
-    margin-bottom: 0.3em;
+.answerText {
+  margin-left: 0.5em;
+}
+
+.addButton {
+  margin-bottom: 0.3em;
+}
+
+.done {
+  left: 100%;
+  position: sticky;
 }
