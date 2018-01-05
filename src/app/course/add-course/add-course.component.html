@@ -25,23 +25,9 @@
               </button>
             </mat-list-item>
           </mat-list>
-          <mat-form-field class="small-width">
-            <input matInput placeholder="Displayname" [(ngModel)]="newFileName" (change)="onUpdateFileName($event)">
-          </mat-form-field>
           <button mat-raised-button (click)="onUploadFile($event, topicIndex)">
             <mat-icon>file_upload</mat-icon>
             Datei hochladen
-          </button>
-          <mat-list>
-            <mat-list-item *ngFor="let quiz of course.tests">
-              <button mat-button (click)="onDeleteTest(testIndex)">{{ quiz.name }}
-                <mat-icon>close</mat-icon>
-              </button>
-            </mat-list-item>
-          </mat-list>
-          <button mat-raised-button (click)="onAddTest()">
-            <mat-icon>add</mat-icon>
-            Test hinzufügen
           </button>
         </mat-card-content>
         <div style="height: 56px">
@@ -49,26 +35,14 @@
             <mat-icon>delete circle</mat-icon>
           </button>
         </div>
-
       </mat-card>
-      <mat-card *ngIf="course.tests">
-        <mat-card-title>
-          Tests für den Kurs: {{ course.name }}
-        </mat-card-title>
-        <mat-card-content>
-          <mat-list>
-            <mat-list-item *ngFor="let quiz of course.tests; index as testIndex">
-              <button mat-button (click)="onDeleteTest(testIndex)">{{ quiz.name }}
-                <mat-icon>close</mat-icon>
-              </button>
-            </mat-list-item>
-          </mat-list>
-          <button mat-button (click)="openAddQuestionDialog()">
-            Frage hinzufügen
-          </button>
-        </mat-card-content>
-      </mat-card>
-
+      <mat-list>
+          <mat-list-item *ngFor="let quiz of course.quizs; index as quizIndex">
+            <button mat-button (click)="onDeleteQuiz(quizIndex)">{{ quiz.name }}
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
     </mat-card-content>
   </mat-card>
 </div>

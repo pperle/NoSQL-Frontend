@@ -12,8 +12,8 @@ export class HttpLoginService {
     return this.http.get(url, {headers: new HttpHeaders({'request-token': this.sessionDataManagerService.user.token})});
   }
 
-  public post(url: string) {
-    return this.http.post(url, {headers: new HttpHeaders({'request-token': this.sessionDataManagerService.user.token})});
+  public post(url: string, body: any) {
+    return this.http.post(url, body, {headers: new HttpHeaders({'request-token': this.sessionDataManagerService.user.token})});
   }
 
 }

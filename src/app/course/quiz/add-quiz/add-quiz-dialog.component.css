@@ -1,0 +1,15 @@
+.full-width {
+    width: 100%;
+}
+
+mat-card {
+    margin: 2em auto;
+  }
+
+.answerText{
+    margin-left: 0.5em;
+}
+
+.addButton{
+    margin-bottom: 0.3em;
+}

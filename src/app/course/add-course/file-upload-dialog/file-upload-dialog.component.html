@@ -1,9 +1,9 @@
-<h1 matDialogTitle>Erstellen Sie einen neuen Test</h1>
-
+<h1 matDialogTitle>Fügen Sie eine Datei hinzu</h1>
+<mat-dialog-content>
 <mat-card>
     <mat-card-content>
         <mat-form-field class="full-width">
-            <input matInput placeholder="Name des Tests" [(ngModel)]="quiz.name" (change)="onUpdateQuizTitle($event)">
+            <input matInput placeholder="Name der Datei" [(ngModel)]="quiz.name" (change)="onUpdateQuizTitle($event)">
         </mat-form-field>
         <mat-form-field>
                 <input matInput [matDatepickerFilter]="notBeforeToday" [matDatepicker]="startDate" placeholder="MM/TT/JJJJ" 
@@ -18,28 +18,10 @@
                 <mat-datepicker #endDate></mat-datepicker>
         </mat-form-field>
     </mat-card-content>
-<mat-dialog-content>
-    <mat-card *ngFor="let question of quiz.questions; index as questionIndex">
-        <mat-card-title>
-            <mat-form-field class="full-width">
-                <input matInput placeholder="Frage" [(ngModel)]="question.questionText" (change)="onUpdateQuestion($event, questionIndex)">
-            </mat-form-field>
-        </mat-card-title>
-        <mat-card-content>
-                <mat-checkbox *ngFor="let answer of question.possibleAnwsers; index as answerIndex" 
-                (change)="onUpdateChecked($event, answerIndex, questionIndex)">
-                    <input class="answerText" matInput placeholder="Antwort" [ngModel]="answer" (change)="onUpdateAnswer($event, answerIndex, questionIndex)">
-                </mat-checkbox>
-        </mat-card-content>
-    </mat-card>
-    <button class="addButton" mat-raised-button (click)="addQuestion()">
-        <mat-icon>add</mat-icon>
-    </button>
-</mat-dialog-content>
 </mat-card>
+</mat-dialog-content>
     <mat-dialog-actions>
         <button mat-button style="left: 65%" mat-dialog-close (click)="onSave()">Test speichern</button>
             <!-- Can optionally provide a result for the closing dialog. -->
         <button mat-button style="left: 70%" [mat-dialog-close]="true">Abbrechen</button>
-        
     </mat-dialog-actions>
