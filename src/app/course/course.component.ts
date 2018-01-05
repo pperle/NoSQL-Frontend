@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SessionDataManagerService } from '../shared/session-data-manager.service';
-import { Course, Message, Status } from '../shared/RestResults';
+import { CourseResult, Message, Status } from '../shared/RestResults';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -15,7 +15,7 @@ import { HttpLoginService } from '../shared/services/http-login.service';
 export class CourseComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
-  course: Course;
+  course: CourseResult;
 
   mainButton: Ng2FloatBtn;
   buttons: Array<Ng2FloatBtn>;
@@ -40,7 +40,7 @@ export class CourseComponent implements OnInit, OnDestroy {
       .subscribe((message: Message) => {
 
         if (message.status === Status.SUCCESS) {
-          this.sessionDataManagerService.course = message.data as Course;
+          this.sessionDataManagerService.course = message.data as CourseResult;
           this.course = this.sessionDataManagerService.course;
         } else {
           this.snackBar.open((message.data as Error).message, '', {

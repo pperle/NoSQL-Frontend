@@ -10,7 +10,7 @@ export enum UserLevel {
 
 export interface Message {
   status: Status;
-  data: Error | LoginResult | CourseResult | Quiz | CourseMetadata | QuizUserResult;
+  data: Error | LoginResult | CourseResult | Quiz | CourseMetadata | QuizUserResult | CourseMetadata[];
 }
 
 export class LoginResult {
@@ -22,26 +22,6 @@ export class LoginResult {
 export interface Error {
   message: string;
 }
-
-export class User {
-  _id: string;
-  level: UserLevel;
-  token: string;
-}
-
-export interface Course {
-  id: number;
-  name: string;
-  topics?: Topic[];
-  tests?: Quiz[];
-}
-
-export interface File {
-  id: number;
-  name: string;
-  link: string;
-}
-
 
 export class CourseResult {
   _id: string;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionDataManagerService } from '../shared/session-data-manager.service';
 import { Router } from '@angular/router';
-import { Course, Message, Status, UserLevel } from '../shared/RestResults';
+import { CourseMetadata, Message, Status, UserLevel } from '../shared/RestResults';
 import { MatSnackBar } from '@angular/material';
 import { HttpLoginService } from '../shared/services/http-login.service';
 
@@ -11,7 +11,7 @@ import { HttpLoginService } from '../shared/services/http-login.service';
   styleUrls: ['./select-course.component.css']
 })
 export class SelectCourseComponent implements OnInit {
-  courses: Course[];
+  courses: CourseMetadata[];
 
   constructor(private sessionDataManagerService: SessionDataManagerService,
               private snackBar: MatSnackBar,
@@ -23,7 +23,7 @@ export class SelectCourseComponent implements OnInit {
     this.http.get('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/courses')
       .subscribe((message: Message) => {
         if (message.status === Status.SUCCESS) {
-          this.courses = message.data as Course[];
+          this.courses = message.data as CourseMetadata[];
           this.autoRedirectStudent();
         } else {
           this.snackBar.open((message.data as Error).message, '', {

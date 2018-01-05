@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Course, Quiz, User } from './RestResults';
+import { CourseResult, Quiz, LoginResult } from './RestResults';
 
 @Injectable()
 export class SessionDataManagerService {
-  public user: User;
-  public course: Course;
+  public user: LoginResult;
+  public course: CourseResult;
   public quiz: Quiz;
 
   constructor() {
