@@ -18,7 +18,7 @@ export class FileUploadDialogComponent implements OnInit {
   ngOnInit() {
     this.file = {
       name: '',
-      visibilityStartDate: new Date(),
+      visibilityStartDate: null,
       visibilityEndDate: null,
       data: []
     };
@@ -47,15 +47,15 @@ export class FileUploadDialogComponent implements OnInit {
 
    notBeforeToday(d: Date) {
      const today = new Date();
-     return d > today;
+     return d >= today;
    }
 
    notBeforeStartDate(d: Date) {
      if (this.file) {
-       return d > this.file.visibilityStartDate;
+       return d >= this.file.visibilityStartDate;
      } else {
        const today = new Date();
-       return d > today;
+       return d >= today;
      }
    }
 

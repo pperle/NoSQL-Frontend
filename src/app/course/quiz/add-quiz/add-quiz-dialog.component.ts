@@ -18,7 +18,7 @@ export class AddQuizDialogComponent implements OnInit {
   ngOnInit() {
     this.quiz = {
       name: '',
-      visibilityStartDate: new Date(),
+      visibilityStartDate: null,
       visibilityEndDate: null,
       questions: [{
         questionText: '',
@@ -73,15 +73,15 @@ export class AddQuizDialogComponent implements OnInit {
 
   notBeforeToday(d: Date) {
     const today = new Date();
-    return d > today;
+    return d >= today;
   }
 
   notBeforeStartDate(d: Date) {
     if (this.quiz) {
-      return d > this.quiz.visibilityStartDate;
+      return d >= this.quiz.visibilityStartDate;
     } else {
       const today = new Date();
-      return d > today;
+      return d >= today;
     }
   }
 

@@ -18,6 +18,7 @@ export class AddCourseComponent implements OnInit {
   mainButton: Ng2FloatBtn;
   buttons: Array<Ng2FloatBtn>;
   newFileName = '';
+  availableUsers = [];
 
   course: NewCourse = {
     name: '',
@@ -41,6 +42,7 @@ export class AddCourseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllAvailableUsers();
 
     this.mainButton = {
       color: 'primary',
@@ -139,5 +141,20 @@ export class AddCourseComponent implements OnInit {
 
   onDeleteQuiz(quizIndex: number) {
     this.course.quizs.splice(quizIndex, 1);
+  }
+
+  getAllAvailableUsers() {
+    this.http.get('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/available')
+    .subscribe((message: Message) => {
+      if (message.status === Status.SUCCESS) {
+        const users =  message.data as string[];
+        console.log(users);
+        this.availableUsers = users;
+      } else {
+        this.snackBar.open((message.data as Error).message, '', {
+          duration: 3500,
+        });
+        this.router.navigate(['course']);
+      }
   }
 }

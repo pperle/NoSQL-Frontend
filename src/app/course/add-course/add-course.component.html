@@ -6,6 +6,14 @@
       </mat-form-field>
     </mat-card-title>
     <mat-card-content>
+      <mat-card>
+        <mat-card-title>Liste aller möglichen Nutzer</mat-card-title>
+        <mat-selection-list>
+          <mat-list-option *ngFor="let user of availableUsers; index as userIndex" [ngModel]="user">
+          </mat-list-option>
+        </mat-selection-list>
+        <button mat-raised-button>Ausgewählte Nutzer hinzufügen</button>
+      </mat-card>
       <mat-card *ngFor="let topic of course.topics; index as topicIndex">
         <mat-card-title>
           <mat-form-field class="full-width">
