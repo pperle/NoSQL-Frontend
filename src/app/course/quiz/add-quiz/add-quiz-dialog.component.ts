@@ -1,7 +1,7 @@
 import { NewQuiz } from './../../../shared/RestResults';
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDatepickerInputEvent, MatDialogRef, MatSnackBar } from '@angular/material';
-import { Validators, FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MyErrorStateMatcher } from '../../../login/login.component';
 
 @Component({

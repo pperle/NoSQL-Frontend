@@ -2,7 +2,7 @@ import { SessionDataManagerService } from './../../../shared/session-data-manage
 import { Message, Status } from './../../../shared/RestResults';
 import { Component, Inject, OnInit, Optional, ViewChild } from '@angular/core';
 import { HttpLoginService } from '../../../shared/services/http-login.service';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDatepickerInputEvent, MatSnackBar, MatListOption } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-add-user-dialog',

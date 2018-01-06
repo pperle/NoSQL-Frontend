@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CourseResult, Quiz, LoginResult } from './RestResults';
+import { CourseResult, LoginResult, Quiz } from './RestResults';
 
 @Injectable()
 export class SessionDataManagerService {

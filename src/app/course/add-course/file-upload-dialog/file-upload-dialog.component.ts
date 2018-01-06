@@ -1,6 +1,6 @@
 import { NewFile } from './../../../shared/RestResults';
 import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDatepickerInputEvent } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDatepickerInputEvent, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-file-upload-dialog',
@@ -45,7 +45,7 @@ export class FileUploadDialogComponent implements OnInit {
      }
    }
 
-   readSingleFile($event) {       
+   readSingleFile($event) {
       this.file.name = $event.target.files[0].name;
       this.fileData = $event.target.files[0];
    }

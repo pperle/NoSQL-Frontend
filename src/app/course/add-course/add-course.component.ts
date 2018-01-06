@@ -1,6 +1,5 @@
-import { inject } from '@angular/core/testing';
 import { Component, OnInit } from '@angular/core';
-import { NewCourse, Message, Status, CourseResult } from '../../shared/RestResults';
+import { CourseResult, Message, NewCourse, Status } from '../../shared/RestResults';
 import { Ng2FloatBtn } from 'ng2-float-btn';
 import { HttpLoginService } from '../../shared/services/http-login.service';
 import { Router } from '@angular/router';

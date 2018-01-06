@@ -3,7 +3,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { ErrorStateMatcher, MatSnackBar } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { Md5 } from 'ts-md5/dist/md5';
-import { Message, Status, LoginResult } from '../shared/RestResults';
+import { LoginResult, Message, Status } from '../shared/RestResults';
 import { Router } from '@angular/router';
 import { SessionDataManagerService } from '../shared/session-data-manager.service';
 
