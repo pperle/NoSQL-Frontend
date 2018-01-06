@@ -85,7 +85,9 @@ export class AddCourseComponent implements OnInit {
         color: 'primary',
         iconName: 'send',
         onClick: () => {
-          this.course.users.push(this.sessionDataManagerService.user._id);
+          if (!this.course.users.includes(this.sessionDataManagerService.user._id)) {
+            this.course.users.push(this.sessionDataManagerService.user._id);
+          }
           this.http.post('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/courses/', this.course
         ).subscribe((message: Message) => {
           if (message.status === Status.SUCCESS) {
