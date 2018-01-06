@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SessionDataManagerService } from '../shared/session-data-manager.service';
-import { CourseResult, Message, QuizUserResult, Status, UserLevel } from '../shared/RestResults';
+import { CourseResult, FileMetadata, Message, QuizUserResult, Status, UserLevel } from '../shared/RestResults';
 import { MatSnackBar, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -70,4 +70,8 @@ export class CourseComponent implements OnInit, OnDestroy {
     }
   }
 
+  downloadFile(file: FileMetadata) {
+    window.open('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/courses/' + this.course._id
+      + '/files/' + file._id + '/token/' + this.sessionDataManagerService.user.token);
+  }
 }

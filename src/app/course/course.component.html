@@ -8,9 +8,8 @@
           <p>{{topic.description}}</p>
           <hr>
           <div *ngIf="topic.files.length > 0">
-            <div *ngFor="let file of topic.files;">
-              <a
-                href="http://localhost:3000/users/{{this.sessionDataManagerService.user._id}}/courses/{{course._id}}/files/{{file._id}}/token/{{this.sessionDataManagerService.user.token}}">{{file.name}}</a>
+            <div *ngFor="let file of topic.files">
+              <button mat-raised-button color="primary" (click)="downloadFile(file)">{{file.name}}</button>
             </div>
           </div>
           <div *ngIf="topic.files.length == 0">
