@@ -1,10 +1,7 @@
 <h1 matDialogTitle>Fügen Sie eine Datei hinzu</h1>
 <mat-dialog-content>
 <mat-card>
-    <mat-card-content>
-        <mat-form-field class="full-width">
-            <input matInput placeholder="Name der Datei" [(ngModel)]="file.name" (change)="onUpdateFileTitle($event)">
-        </mat-form-field>
+    <mat-card-content>        
         <mat-form-field>
                 <input matInput [matDatepickerFilter]="notBeforeToday" [matDatepicker]="startDate" placeholder="MM/TT/JJJJ"
                 [(ngModel)]="file.visibilityStartDate" (dateChange)="onUpdateVisibilityStartDate($event)" readonly>

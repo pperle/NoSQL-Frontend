@@ -45,8 +45,9 @@ export class FileUploadDialogComponent implements OnInit {
      }
    }
 
-   readSingleFile($event) {
-      this.fileData = $event.target.files[0];      
+   readSingleFile($event) {       
+      this.file.name = $event.target.files[0].name;
+      this.fileData = $event.target.files[0];
    }
 
 
@@ -81,7 +82,7 @@ export class FileUploadDialogComponent implements OnInit {
         file.data = reader.result;
         matDialogRef.close(file);
     }
-    reader.readAsText(this.fileData);
+    reader.readAsBinaryString(this.fileData);
   }
 
 }
