@@ -3,17 +3,17 @@
 <mat-card>
     <mat-card-content>
         <mat-form-field class="full-width">
-            <input matInput placeholder="Name der Datei" [(ngModel)]="quiz.name" (change)="onUpdateQuizTitle($event)">
+            <input matInput placeholder="Name der Datei" [(ngModel)]="file.name" (change)="onUpdateFileTitle($event)">
         </mat-form-field>
         <mat-form-field>
-                <input matInput [matDatepickerFilter]="notBeforeToday" [matDatepicker]="startDate" placeholder="MM/TT/JJJJ" 
-                [(ngModel)]="quiz.visibilityStartDate" (dateChange)="onUpdateVisibilityStartDate($event)" readonly>
+                <input matInput [matDatepickerFilter]="notBeforeToday" [matDatepicker]="startDate" placeholder="MM/TT/JJJJ"
+                [(ngModel)]="file.visibilityStartDate" (dateChange)="onUpdateVisibilityStartDate($event)" readonly>
                 <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
                 <mat-datepicker #startDate></mat-datepicker>
         </mat-form-field>
         <mat-form-field>
-                <input matInput [matDatepickerFilter]="notBeforeStartDate" [matDatepicker]="endDate" placeholder="MM/TT/JJJJ" 
-                [(ngModel)]="quiz.visibilityEndDate" (dateChange)="onUpdateVisibilityEndDate($event)" readonly>
+                <input matInput [matDatepickerFilter]="notBeforeStartDate" [matDatepicker]="endDate" placeholder="MM/TT/JJJJ"
+                [(ngModel)]="file.visibilityEndDate" (dateChange)="onUpdateVisibilityEndDate($event)" readonly>
                 <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
                 <mat-datepicker #endDate></mat-datepicker>
         </mat-form-field>
@@ -21,7 +21,7 @@
 </mat-card>
 </mat-dialog-content>
     <mat-dialog-actions>
-        <button mat-button style="left: 65%" mat-dialog-close (click)="onSave()">Test speichern</button>
+        <button mat-button style="left: 65%" mat-dialog-close (click)="onSave()">Datei speichern</button>
             <!-- Can optionally provide a result for the closing dialog. -->
         <button mat-button style="left: 70%" [mat-dialog-close]="true">Abbrechen</button>
     </mat-dialog-actions>
