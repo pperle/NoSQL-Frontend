@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SessionDataManagerService } from '../shared/session-data-manager.service';
-import { CourseResult, Message, Status } from '../shared/RestResults';
-import { MatSnackBar } from '@angular/material';
+import { CourseResult, Message, QuizUserResult, Status, UserLevel } from '../shared/RestResults';
+import { MatSnackBar, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { Ng2FloatBtn } from 'ng2-float-btn';
 import { HttpLoginService } from '../shared/services/http-login.service';
 
 @Component({
@@ -14,11 +13,9 @@ import { HttpLoginService } from '../shared/services/http-login.service';
 })
 export class CourseComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-
   course: CourseResult;
-
-  mainButton: Ng2FloatBtn;
-  buttons: Array<Ng2FloatBtn>;
+  displayedColumns = ['user', 'points'];
+  quizUserResultMap: Map<string, MatTableDataSource<QuizUserResult>> = new Map();
 
   constructor(private sessionDataManagerService: SessionDataManagerService,
               private snackBar: MatSnackBar,
@@ -35,23 +32,36 @@ export class CourseComponent implements OnInit, OnDestroy {
   }
 
   private loadCourseFromBackend(courseId: string) {
-    // this.http.get('http://localhost:3000/user/' + this.sessionDataManagerService.user.id + '/course/' + courseId)
     this.http.get('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/courses/' + courseId)
       .subscribe((message: Message) => {
+          if (message.status === Status.SUCCESS) {
+            this.sessionDataManagerService.course = message.data as CourseResult;
+            this.course = this.sessionDataManagerService.course;
 
-        if (message.status === Status.SUCCESS) {
-          this.sessionDataManagerService.course = message.data as CourseResult;
-          this.course = this.sessionDataManagerService.course;
-        } else {
-          this.snackBar.open((message.data as Error).message, '', {
-            duration: 3500,
-          });
+            if (this.sessionDataManagerService.user.level === UserLevel.PROFESSOR) {
+              this.course.quizs.forEach(quiz => {
+                this.http.get('http://localhost:3000/dashboards/users/' + this.sessionDataManagerService.user._id + '/courses/' + courseId + '/quizs/' + quiz._id)
+                  .subscribe((quiz_message: Message) => {
+                      if (quiz_message.status === Status.SUCCESS) {
+                        const myDataSource = new MatTableDataSource<QuizUserResult>();
+                        myDataSource.data = quiz_message.data as QuizUserResult[];
+                        this.quizUserResultMap.set(quiz._id, myDataSource);
+                      }
+                    }
+                  );
+              });
+            }
+          } else {
+            this.snackBar.open((message.data as Error).message, '', {
+              duration: 3500,
+            });
+          }
         }
-      });
+      );
   }
 
-  private loadQuiz(quizId: string) {
-     this.router.navigate(['users', this.sessionDataManagerService.user._id, 'quizs', quizId]);
+  loadQuiz(quizId: string) {
+    this.router.navigate(['users', this.sessionDataManagerService.user._id, 'quizs', quizId]);
   }
 
   ngOnDestroy(): void {

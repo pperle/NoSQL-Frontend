@@ -9,7 +9,8 @@
           <hr>
           <div *ngIf="topic.files.length > 0">
             <div *ngFor="let file of topic.files;">
-              <a href="http://localhost:3000/users/{{this.sessionDataManagerService.user._id}}/courses/{{course._id}}/files/{{file._id}}/token/{{this.sessionDataManagerService.user.token}}">{{file.name}}</a>
+              <a
+                href="http://localhost:3000/users/{{this.sessionDataManagerService.user._id}}/courses/{{course._id}}/files/{{file._id}}/token/{{this.sessionDataManagerService.user.token}}">{{file.name}}</a>
             </div>
           </div>
           <div *ngIf="topic.files.length == 0">
@@ -20,7 +21,31 @@
       <mat-card *ngFor="let quiz of course.quizs">
         <mat-card-title>{{quiz.name}}</mat-card-title>
         <mat-card-content>
-          <a class = "clickable" (click)="loadQuiz(quiz._id)">Test starten</a>
+          <button *ngIf="this.sessionDataManagerService.user.level == 'STUDENT'" mat-raised-button color="primary"
+                  (click)="loadQuiz(quiz._id)">Test starten
+          </button>
+          <div *ngIf="this.sessionDataManagerService.user.level == 'PROFESSOR'">
+
+            <div class="example-container mat-elevation-z8">
+              <mat-table [dataSource]="this.quizUserResultMap.get(quiz._id)">
+                <!-- User Column -->
+                <ng-container matColumnDef="user">
+                  <mat-header-cell *matHeaderCellDef>User</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.user_id}}</mat-cell>
+                </ng-container>
+
+                <!-- Points Column -->
+                <ng-container matColumnDef="points">
+                  <mat-header-cell *matHeaderCellDef>Punkte</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.points}}</mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </div>
+
+          </div>
         </mat-card-content>
       </mat-card>
     </mat-card-content>

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import {
   MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatDialogModule, MatIconModule, MatInputModule,
-  MatListModule, MatMenuModule, MatNativeDateModule, MatRadioModule, MatSnackBarModule, MatToolbarModule
+  MatListModule, MatMenuModule, MatNativeDateModule, MatRadioModule, MatSnackBarModule, MatTableModule, MatToolbarModule
 } from '@angular/material';
 
 @NgModule({
@@ -19,7 +19,8 @@ import {
     MatDialogModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTableModule
   ],
   exports: [
     MatButtonModule,
@@ -34,7 +35,8 @@ import {
     MatDialogModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTableModule
   ]
 })
 export class MaterialModule {
