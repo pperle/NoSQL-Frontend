@@ -8,15 +8,15 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDatepickerInputEvent } from '@angular
   styleUrls: ['./file-upload-dialog.component.css']
 })
 export class FileUploadDialogComponent implements OnInit {
-    static file: NewFile;
-    static fileData;
+    file: NewFile;
+    fileData;
 
   constructor(@Optional() @Inject(MAT_DIALOG_DATA) private dialogData: any,
     private matDialogRef: MatDialogRef<FileUploadDialogComponent>) {
   }
 
   ngOnInit() {
-    FileUploadDialogComponent.file = {
+    this.file = {
       name: '',
       visibilityStartDate: null,
       visibilityEndDate: null,
@@ -25,41 +25,28 @@ export class FileUploadDialogComponent implements OnInit {
   }
 
   onUpdateFileTitle($event) {
-    FileUploadDialogComponent.file.name = $event.target.value;
+    this.file.name = $event.target.value;
   }
 
   onUpdateVisibilityStartDate(event: MatDatepickerInputEvent<Date>) {
       const newDate = event.target.value;
-      FileUploadDialogComponent.file.visibilityStartDate = newDate;
-      if (FileUploadDialogComponent.file.visibilityEndDate && FileUploadDialogComponent.file.visibilityEndDate < newDate) {
-        FileUploadDialogComponent.file.visibilityEndDate = newDate;
+      this.file.visibilityStartDate = newDate;
+      if (this.file.visibilityEndDate && this.file.visibilityEndDate < newDate) {
+        this.file.visibilityEndDate = newDate;
       }
    }
 
    onUpdateVisibilityEndDate(event: MatDatepickerInputEvent<Date>) {
      const newDate = event.target.value;
-     if (newDate < FileUploadDialogComponent.file.visibilityStartDate) {
-       FileUploadDialogComponent.file.visibilityEndDate = FileUploadDialogComponent.file.visibilityStartDate;
+     if (newDate < this.file.visibilityStartDate) {
+       this.file.visibilityEndDate = this.file.visibilityStartDate;
      } else {
-       FileUploadDialogComponent.file.visibilityEndDate = newDate;
+       this.file.visibilityEndDate = newDate;
      }
    }
 
    readSingleFile($event) {
-      FileUploadDialogComponent.fileData = $event.target.files[0];
-       /*
-      const selectedFile = $event.target.files[0];
-      const reader = new FileReader();
-
-      if (!selectedFile) {
-        return;
-      }
-      reader.onload = function(e: Event) {
-        console.log(reader.result);
-      };
-
-      reader.readAsText(selectedFile);
-      */
+      this.fileData = $event.target.files[0];      
    }
 
 
@@ -69,8 +56,8 @@ export class FileUploadDialogComponent implements OnInit {
    }
 
    notBeforeStartDate(d: Date) {
-     if (FileUploadDialogComponent.file) {
-       return d >= FileUploadDialogComponent.file.visibilityStartDate;
+     if (this.file) {
+       return d >= this.file.visibilityStartDate;
      } else {
        const today = new Date();
        return d >= today;
@@ -78,21 +65,23 @@ export class FileUploadDialogComponent implements OnInit {
    }
 
   addData($event) {
-    FileUploadDialogComponent.file.data = $event.target.value;
+    this.file.data = $event.target.value;
   }
 
   public onSave() {
     const reader = new FileReader();
-    const test:MatDialogRef<FileUploadDialogComponent> = this.matDialogRef;
+    let matDialogRef: MatDialogRef<FileUploadDialogComponent> = this.matDialogRef;
+    let file = this.file;
 
-    if (!FileUploadDialogComponent.fileData) {
+    if (!this.fileData) {
       return;
     }
-    reader.onload = function(e: Event) {
-      FileUploadDialogComponent.file.data = reader.result;
-      test.close(FileUploadDialogComponent.file);
-    };
-    reader.readAsText(FileUploadDialogComponent.fileData);
-  } 
+
+    reader.onloadend = function(e: Event) {
+        file.data = reader.result;
+        matDialogRef.close(file);
+    }
+    reader.readAsText(this.fileData);
+  }
 
 }
