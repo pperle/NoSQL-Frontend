@@ -5,13 +5,13 @@
       <mat-card *ngFor="let question of quiz.questions; index as questionIndex">
         <mat-card-title>{{question.question}}</mat-card-title>
         <mat-card-content>
-          <mat-radio-group class="answer" *ngIf="question.answers.length > 1">
+<!--          <mat-radio-group class="answer" *ngIf="question.answers.length > 1">
             <mat-radio-button class="answer-button" *ngFor="let answer of question.answers; index as answerIndex"
                               value="{{answer}}" (change)="onUpdateCheckedSingeAnswer(questionIndex, answerIndex)">
               {{answer}}
             </mat-radio-button>
-          </mat-radio-group>
-          <span class="answer" *ngIf="question.answers.length === 1">
+          </mat-radio-group>-->
+          <span class="answer">
             <mat-checkbox class="answer-button" *ngFor="let answer of question.answers; index as answerIndex"
                           value="{{answer}}" (change)="onUpdateCheckedMultipleAnswers(questionIndex, answerIndex)">
               {{answer}}
