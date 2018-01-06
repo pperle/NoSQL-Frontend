@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CourseResult, Message, NewCourse, Status } from '../../shared/RestResults';
+import { Message, NewCourse, Status } from '../../shared/RestResults';
 import { Ng2FloatBtn } from 'ng2-float-btn';
 import { HttpLoginService } from '../../shared/services/http-login.service';
 import { Router } from '@angular/router';
@@ -119,37 +119,35 @@ export class AddCourseComponent implements OnInit {
   }
 
   throwCorrectSnackBarMessage() {
-  if (this.courseFormControl.invalid && this.topicFormControl.invalid) {
-    this.snackBar.open('Ein Titel zum Thema und ein Kursname wird benötig', '', {
-      duration: 3500,
-    });
-  } else if (this.topicFormControl.invalid) {
-    this.snackBar.open('Ein Titel zum Thema wird benötig', '', {
-      duration: 3500,
-    });
-  } else {
-    this.snackBar.open('Ein Kursname wird benötig', '', {
-      duration: 3500,
-    });
+    if (this.courseFormControl.invalid && this.topicFormControl.invalid) {
+      this.snackBar.open('Ein Titel zum Thema und ein Kursname wird benötig', '', {
+        duration: 3500,
+      });
+    } else if (this.topicFormControl.invalid) {
+      this.snackBar.open('Ein Titel zum Thema wird benötig', '', {
+        duration: 3500,
+      });
+    } else {
+      this.snackBar.open('Ein Kursname wird benötig', '', {
+        duration: 3500,
+      });
+    }
   }
-}
 
   sendCourse() {
     if (!this.course.users.includes(this.sessionDataManagerService.user._id)) {
       this.course.users.push(this.sessionDataManagerService.user._id);
     }
     this.http.post('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/courses/', this.course)
-    .subscribe((message: Message) => {
-      if (message.status === Status.SUCCESS) {
-        const addedCourse =  message.data as CourseResult;
-        this.router.navigate(['course/' + addedCourse._id]);
-      } else {
-        this.snackBar.open((message.data as Error).message, '', {
-          duration: 3500,
-        });
-        this.router.navigate(['course']);
-     }
-    });
+      .subscribe((message: Message) => {
+        if (message.status === Status.SUCCESS) {
+          this.router.navigate(['courses']);
+        } else {
+          this.snackBar.open((message.data as Error).message, '', {
+            duration: 3500,
+          });
+        }
+      });
   }
 
   onUpdateCourseName($event) {
