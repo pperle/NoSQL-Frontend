@@ -2,7 +2,11 @@
   <mat-card *ngIf="course">
     <mat-card-title>
       <mat-form-field class="full-width">
-        <input matInput placeholder="Kursname" [(ngModel)]="course.name" (change)="onUpdateCourseName($event)">
+        <input matInput placeholder="Kursname" [formControl]="courseFormControl"
+        [errorStateMatcher]="courseTitleMatcher" [(ngModel)]="course.name" (change)="onUpdateCourseName($event)">
+        <mat-error *ngIf="courseFormControl.hasError('required')">
+            Ein Kursname wird <strong>benötigt</strong>.
+          </mat-error>
       </mat-form-field>
     </mat-card-title>
     <mat-card>
@@ -22,8 +26,12 @@
       <mat-card *ngFor="let topic of course.topics; index as topicIndex">
         <mat-card-title>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Titel" [(ngModel)]="topic.name"
+            <input matInput placeholder="Titel" [formControl]="topicFormControl"
+            [errorStateMatcher]="topicMatcher" [(ngModel)]="topic.name"
                    (change)="onUpdateTopicTitle($event, topicIndex)">
+                   <mat-error *ngIf="topicFormControl.hasError('required')">
+                      Ein Titel für das Thema wird <strong>benötigt</strong>.
+                    </mat-error>
           </mat-form-field>
         </mat-card-title>
         <mat-card-content>

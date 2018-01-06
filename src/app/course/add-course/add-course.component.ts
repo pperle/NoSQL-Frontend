@@ -1,3 +1,4 @@
+import { inject } from '@angular/core/testing';
 import { Component, OnInit } from '@angular/core';
 import { NewCourse, Message, Status, CourseResult } from '../../shared/RestResults';
 import { Ng2FloatBtn } from 'ng2-float-btn';
@@ -8,6 +9,8 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { SessionDataManagerService } from '../../shared/session-data-manager.service';
 import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dialog.component';
 import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
+import { FormControl, Validators } from '@angular/forms';
+import { MyErrorStateMatcher } from '../../login/login.component';
 
 @Component({
   selector: 'app-add-course',
@@ -19,6 +22,19 @@ export class AddCourseComponent implements OnInit {
   mainButton: Ng2FloatBtn;
   buttons: Array<Ng2FloatBtn>;
   newFileName = '';
+
+  topicFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(1)
+  ]);
+
+  courseFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(1)
+  ]);
+
+  courseTitleMatcher = new MyErrorStateMatcher();
+  topicMatcher = new MyErrorStateMatcher();
 
   course: NewCourse = {
     name: '',
@@ -66,18 +82,7 @@ export class AddCourseComponent implements OnInit {
         color: 'primary',
         iconName: 'assignment',
         onClick: () => {
-          this.quizDialog.open(AddQuizDialogComponent, {
-            height: '85%'
-          }).afterClosed().subscribe(result => {
-            if (result) {
-              if (result === true) {
-
-              } else {
-                console.log(result);
-                this.course.quizs.push(result);
-              }
-            }
-          });
+          this.openQuizDialog();
         },
         label: 'Test',
       },
@@ -85,26 +90,67 @@ export class AddCourseComponent implements OnInit {
         color: 'primary',
         iconName: 'send',
         onClick: () => {
-          if (!this.course.users.includes(this.sessionDataManagerService.user._id)) {
-            this.course.users.push(this.sessionDataManagerService.user._id);
-          }
-          this.http.post('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/courses/', this.course
-        ).subscribe((message: Message) => {
-          if (message.status === Status.SUCCESS) {
-            const addedCourse =  message.data as CourseResult;
-            this.router.navigate(['course/' + addedCourse._id]);
-          } else {
-            this.snackBar.open((message.data as Error).message, '', {
-              duration: 3500,
-            });
-            this.router.navigate(['course']);
-          }
-        });
+          this.checkValidationBeforeSending();
         },
         label: 'Anlegen'
       }
     ];
 
+  }
+
+  openQuizDialog() {
+    this.quizDialog.open(AddQuizDialogComponent, {
+      width: '75%',
+      height: '85%'
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        if (result !== true) {
+          this.course.quizs.push(result);
+        }
+      }
+    });
+  }
+
+  checkValidationBeforeSending() {
+    if (this.courseFormControl.invalid || this.topicFormControl.invalid) {
+      this.throwCorrectSnackBarMessage();
+    } else {
+      this.sendCourse();
+    }
+  }
+
+  throwCorrectSnackBarMessage() {
+  if (this.courseFormControl.invalid && this.topicFormControl.invalid) {
+    this.snackBar.open('Ein Titel zum Thema und ein Kursname wird benötig', '', {
+      duration: 3500,
+    });
+  } else if (this.topicFormControl.invalid) {
+    this.snackBar.open('Ein Titel zum Thema wird benötig', '', {
+      duration: 3500,
+    });
+  } else {
+    this.snackBar.open('Ein Kursname wird benötig', '', {
+      duration: 3500,
+    });
+  }
+}
+
+  sendCourse() {
+    if (!this.course.users.includes(this.sessionDataManagerService.user._id)) {
+      this.course.users.push(this.sessionDataManagerService.user._id);
+    }
+    this.http.post('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/courses/', this.course)
+    .subscribe((message: Message) => {
+      if (message.status === Status.SUCCESS) {
+        const addedCourse =  message.data as CourseResult;
+        this.router.navigate(['course/' + addedCourse._id]);
+      } else {
+        this.snackBar.open((message.data as Error).message, '', {
+          duration: 3500,
+        });
+        this.router.navigate(['course']);
+     }
+    });
   }
 
   onUpdateCourseName($event) {

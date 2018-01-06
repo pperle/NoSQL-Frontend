@@ -1,6 +1,8 @@
 import { NewQuiz } from './../../../shared/RestResults';
 import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDatepickerInputEvent, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDatepickerInputEvent, MatDialogRef, MatSnackBar } from '@angular/material';
+import { Validators, FormControl } from '@angular/forms';
+import { MyErrorStateMatcher } from '../../../login/login.component';
 
 @Component({
   selector: 'app-add-quiz-dialog',
@@ -11,7 +13,27 @@ export class AddQuizDialogComponent implements OnInit {
 
   quiz: NewQuiz;
 
+  questionFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(1)
+  ]);
+
+  answerFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(1)
+  ]);
+
+  quiznameFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(1)
+  ]);
+
+  questionMatcher = new MyErrorStateMatcher();
+  answerMatcher = new MyErrorStateMatcher();
+  quiznameMatcher = new MyErrorStateMatcher();
+
   constructor(@Optional() @Inject(MAT_DIALOG_DATA) private dialogData: any,
+              private snackBar: MatSnackBar,
               private matDialogRef: MatDialogRef<AddQuizDialogComponent>) {
   }
 
@@ -37,9 +59,7 @@ export class AddQuizDialogComponent implements OnInit {
   }
 
   onUpdateAnswer($event, questionIndex: number, answerIndex: number) {
-    console.log(answerIndex);
     this.quiz.questions[questionIndex].possibleAnwsers[answerIndex] = $event.target.value;
-    console.log(this.quiz.questions[questionIndex].possibleAnwsers);
   }
 
   addQuestion() {
@@ -51,7 +71,24 @@ export class AddQuizDialogComponent implements OnInit {
   }
 
   public onSave() {
-    this.matDialogRef.close(this.quiz);
+    if (this.everyQuestionHasAtLeastOneCorrectAnswer()) {
+      this.matDialogRef.close(this.quiz);
+    } else {
+        this.snackBar.open('Jede Frage benötigt mindestens eine korrekte Antwort', '', {
+          duration: 4000,
+        });
+    }
+  }
+
+  everyQuestionHasAtLeastOneCorrectAnswer(): boolean {
+    let result = true;
+    this.quiz.questions.forEach(element => {
+      console.log(element.correctAnwsers.length);
+      if (element.correctAnwsers.length === 0) {
+        result = false;
+      }
+    });
+    return result;
   }
 
   onUpdateVisibilityStartDate(event: MatDatepickerInputEvent<Date>) {
@@ -87,7 +124,6 @@ export class AddQuizDialogComponent implements OnInit {
 
   onUpdateChecked($event, questionIndex: number, answerIndex: number, ) {
     if ($event.checked) {
-      console.log(answerIndex);
       this.quiz.questions[questionIndex].correctAnwsers.push(answerIndex);
     } else if ($event.checked === false) {
       const ca = this.quiz.questions[questionIndex].correctAnwsers;
@@ -99,6 +135,10 @@ export class AddQuizDialogComponent implements OnInit {
       }
       this.quiz.questions[questionIndex].correctAnwsers.splice(actualIndex, 1);
     }
+  }
+
+  deleteQuestion(questionIndex: number) {
+    this.quiz.questions.splice(questionIndex, 1);
   }
 
 }
