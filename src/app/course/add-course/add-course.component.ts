@@ -147,14 +147,12 @@ export class AddCourseComponent implements OnInit {
     this.http.get('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/available')
     .subscribe((message: Message) => {
       if (message.status === Status.SUCCESS) {
-        const users =  message.data as string[];
-        console.log(users);
-        this.availableUsers = users;
+        this.availableUsers =  message.data as string[];
       } else {
         this.snackBar.open((message.data as Error).message, '', {
           duration: 3500,
         });
-        this.router.navigate(['course']);
       }
+    });
   }
 }
