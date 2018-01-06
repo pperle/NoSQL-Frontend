@@ -5,7 +5,19 @@
         <input matInput placeholder="Kursname" [(ngModel)]="course.name" (change)="onUpdateCourseName($event)">
       </mat-form-field>
     </mat-card-title>
-    <button mat-raised-button (click)="onAddUserToCourse()">Nutzer hinzufügen</button>
+    <mat-card>
+      <mat-card-title>
+          Liste aller Nutzer in diesem Kurs
+          <button mat-raised-button (click)="onAddUserToCourse()">Nutzer hinzufügen</button>
+      </mat-card-title>
+      <mat-card-content>
+        <label *ngFor="let user of course.users; index as userIndex">
+          <button mat-button (click)="onRemoveUser(userIndex)">{{ user }}
+            <mat-icon>close</mat-icon>
+          </button>
+        </label>
+      </mat-card-content>
+    </mat-card>
     <mat-card-content>
       <mat-card *ngFor="let topic of course.topics; index as topicIndex">
         <mat-card-title>

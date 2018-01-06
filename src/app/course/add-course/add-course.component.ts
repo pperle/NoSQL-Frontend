@@ -85,7 +85,7 @@ export class AddCourseComponent implements OnInit {
         color: 'primary',
         iconName: 'send',
         onClick: () => {
-
+          this.course.users.push(this.sessionDataManagerService.user._id);
           this.http.post('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/courses/', this.course
         ).subscribe((message: Message) => {
           if (message.status === Status.SUCCESS) {
@@ -144,14 +144,18 @@ export class AddCourseComponent implements OnInit {
     this.course.quizs.splice(quizIndex, 1);
   }
 
+  onRemoveUser(userIndex: number) {
+    this.course.users.splice(userIndex, 1);
+  }
+
   onAddUserToCourse() {
     this.userDialog.open(AddUserDialogComponent, {
       width: '80%',
-      height: '85%'
+      height: '85%',
+      data: this.course.users
     }).afterClosed().subscribe(result => {
       if (result !== true) {
         this.course.users = result;
-        console.log(result);
       }
     });
   }

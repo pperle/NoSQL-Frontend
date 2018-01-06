@@ -26,14 +26,24 @@ export class AddUserDialogComponent implements OnInit {
     this.http.get('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/available')
     .subscribe((message: Message) => {
       if (message.status === Status.SUCCESS) {
-        this.users =  message.data as string[];
+        const availableUsers = message.data as string[];
+        this.usersToAdd = this.dialogData;
+        if (this.usersToAdd != null) {
+            this.users = [];
+            availableUsers.forEach(element => {
+                if (!this.usersToAdd.includes(element)) {
+                   this.users.push(element);
+                }
+            });
+        } else {
+            this.users = availableUsers;
+        }
       } else {
         this.snackBar.open((message.data as Error).message, '', {
           duration: 3500,
         });
       }
     });
-    this.usersToAdd = [];
   }
 
   public onSave() {
