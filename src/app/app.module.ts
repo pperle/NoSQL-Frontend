@@ -48,7 +48,8 @@ import { FileUploadDialogComponent } from './course/add-course/file-upload-dialo
     LoginGuard,
     HttpLoginService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [FileUploadDialogComponent]
 })
 export class AppModule {
 }
