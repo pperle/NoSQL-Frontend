@@ -2,14 +2,21 @@
   <mat-card *ngIf="quiz">
     <mat-card-title>{{quiz.name}}</mat-card-title>
     <mat-card-content>
-      <mat-card *ngFor="let question of quiz.questions">
+      <mat-card *ngFor="let question of quiz.questions; index as questionIndex">
         <mat-card-title>{{question.question}}</mat-card-title>
         <mat-card-content>
-          <mat-radio-group>
-            <p>
-              <mat-radio-button *ngFor="let answer of question.answers" [value]="answer">{{answer}}</mat-radio-button>
-            </p>
+          <mat-radio-group class="answer" *ngIf="question.answers.length > 1">
+            <mat-radio-button class="answer-button" *ngFor="let answer of question.answers; index as answerIndex"
+                              value="{{answer}}" (change)="onUpdateCheckedSingeAnswer(questionIndex, answerIndex)">
+              {{answer}}
+            </mat-radio-button>
           </mat-radio-group>
+          <span class="answer" *ngIf="question.answers.length === 1">
+            <mat-checkbox class="answer-button" *ngFor="let answer of question.answers; index as answerIndex"
+                          value="{{answer}}" (change)="onUpdateCheckedMultipleAnswers(questionIndex, answerIndex)">
+              {{answer}}
+            </mat-checkbox>
+          </span>
         </mat-card-content>
       </mat-card>
     </mat-card-content>

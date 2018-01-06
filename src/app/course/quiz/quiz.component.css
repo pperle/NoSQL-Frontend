@@ -8,3 +8,12 @@ mat-card {
   right: 20px;
   color: white;
 }
+
+.answer {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.answer-button {
+  margin: 5px;
+}
