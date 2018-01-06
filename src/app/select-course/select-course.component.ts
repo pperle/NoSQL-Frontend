@@ -34,8 +34,8 @@ export class SelectCourseComponent implements OnInit {
   }
 
   private autoRedirectStudent() {
-    if (this.sessionDataManagerService.user.level === UserLevel.STUDENT) {
-      this.router.navigate(['courses', this.courses[0].name]);
+    if (this.sessionDataManagerService.user.level === UserLevel.STUDENT && this.courses && this.courses.length === 1) {
+      this.redirectToCourse(0);
     }
   }
 
