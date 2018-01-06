@@ -2,31 +2,16 @@
   <mat-toolbar color="primary" class="toolbar">
     <span>
       <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-      {{sessionDataManagerService.user?.id}}
+      {{sessionDataManagerService.user?._id}}
     </span>
 
     <span>Lernplattform</span>
 
-    <button mat-icon-button [mat-menu-trigger-for]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
+    <span></span>
   </mat-toolbar>
-  <mat-menu xPosition="before" #menu="matMenu">
-    <button mat-menu-item>Option 1</button>
-    <button mat-menu-item>Option 2</button>
-    <button mat-menu-item>Option 3</button>
-    <button mat-menu-item>Another one...</button>
-  </mat-menu>
+
 
   <div class="outlet">
     <router-outlet></router-outlet>
   </div>
-
-  <!--
-    <span class="done">
-      <button mat-fab>
-        <mat-icon>check circle</mat-icon>
-      </button>
-    </span>
-  -->
 </div>
