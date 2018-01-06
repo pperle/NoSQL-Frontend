@@ -82,7 +82,7 @@ export class FileUploadDialogComponent implements OnInit {
         file.data = reader.result;
         matDialogRef.close(file);
     }
-    reader.readAsBinaryString(this.fileData);
+    reader.readAsDataURL(this.fileData);
   }
 
 }
