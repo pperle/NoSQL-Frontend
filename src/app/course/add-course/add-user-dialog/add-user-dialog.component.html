@@ -1,0 +1,17 @@
+<h1 matDialogTitle>Fügen Sie Nutzer hinzu</h1>
+<mat-dialog-content>
+<mat-card>
+    <mat-card-content>
+            <mat-selection-list #selectedUsers>
+                    <mat-list-option *ngFor="let user of users; index as userIndex" value="{{user}}">
+                        {{user}}
+                    </mat-list-option>
+            </mat-selection-list>
+    </mat-card-content>
+</mat-card>
+</mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button style="left: 65%" mat-dialog-close (click)="onSave()">Ausgewählte Nutzer hinzufügen</button>
+            <!-- Can optionally provide a result for the closing dialog. -->
+        <button mat-button style="left: 70%" [mat-dialog-close]="true">Abbrechen</button>
+    </mat-dialog-actions>

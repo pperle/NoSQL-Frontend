@@ -7,6 +7,7 @@ import { AddQuizDialogComponent } from './../quiz/add-quiz/add-quiz-dialog.compo
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { SessionDataManagerService } from '../../shared/session-data-manager.service';
 import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dialog.component';
+import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
 
 @Component({
   selector: 'app-add-course',
@@ -18,7 +19,6 @@ export class AddCourseComponent implements OnInit {
   mainButton: Ng2FloatBtn;
   buttons: Array<Ng2FloatBtn>;
   newFileName = '';
-  availableUsers = [];
 
   course: NewCourse = {
     name: '',
@@ -37,12 +37,12 @@ export class AddCourseComponent implements OnInit {
               private http: HttpLoginService,
               private sessionDataManagerService: SessionDataManagerService,
               private snackBar: MatSnackBar,
+              private userDialog: MatDialog,
               private fileDialog: MatDialog,
               private quizDialog: MatDialog) {
   }
 
   ngOnInit() {
-    this.getAllAvailableUsers();
 
     this.mainButton = {
       color: 'primary',
@@ -127,6 +127,7 @@ export class AddCourseComponent implements OnInit {
 
   onUploadFile($event, topicIndex) {
     this.fileDialog.open(FileUploadDialogComponent, {
+      width: '80%',
       height: '85%'
     }).afterClosed().subscribe(result => {
       if (result !== true) {
@@ -143,15 +144,14 @@ export class AddCourseComponent implements OnInit {
     this.course.quizs.splice(quizIndex, 1);
   }
 
-  getAllAvailableUsers() {
-    this.http.get('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/available')
-    .subscribe((message: Message) => {
-      if (message.status === Status.SUCCESS) {
-        this.availableUsers =  message.data as string[];
-      } else {
-        this.snackBar.open((message.data as Error).message, '', {
-          duration: 3500,
-        });
+  onAddUserToCourse() {
+    this.userDialog.open(AddUserDialogComponent, {
+      width: '80%',
+      height: '85%'
+    }).afterClosed().subscribe(result => {
+      if (result !== true) {
+        this.course.users = result;
+        console.log(result);
       }
     });
   }

@@ -19,6 +19,7 @@ import { Ng2FloatBtnModule } from 'ng2-float-btn';
 import { AddCourseComponent } from './course/add-course/add-course.component';
 import { HttpLoginService } from './shared/services/http-login.service';
 import { FileUploadDialogComponent } from './course/add-course/file-upload-dialog/file-upload-dialog.component';
+import { AddUserDialogComponent } from './course/add-course/add-user-dialog/add-user-dialog.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { FileUploadDialogComponent } from './course/add-course/file-upload-dialo
     SelectCourseComponent,
     AddCourseComponent,
     AddQuizDialogComponent,
-    FileUploadDialogComponent
+    FileUploadDialogComponent,
+    AddUserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import { FileUploadDialogComponent } from './course/add-course/file-upload-dialo
     HttpLoginService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [FileUploadDialogComponent]
+  entryComponents: [FileUploadDialogComponent, AddUserDialogComponent]
 })
 export class AppModule {
 }
