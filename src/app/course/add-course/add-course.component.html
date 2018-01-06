@@ -8,9 +8,9 @@
     <mat-card-content>
       <mat-card>
         <mat-card-title>Liste aller möglichen Nutzer</mat-card-title>
-        <mat-selection-list>
-          <mat-list-option *ngFor="let user of availableUsers; index as userIndex" [ngModel]="user">
-          </mat-list-option>
+
+        <mat-selection-list #selectedUsers>
+          <mat-list-option *ngFor="let user of availableUsers; index as userIndex">{{user}}</mat-list-option>
         </mat-selection-list>
         <button mat-raised-button>Ausgewählte Nutzer hinzufügen</button>
       </mat-card>
@@ -45,12 +45,12 @@
         </div>
       </mat-card>
       <mat-list>
-          <mat-list-item *ngFor="let quiz of course.quizs; index as quizIndex">
-            <button mat-button (click)="onDeleteQuiz(quizIndex)">{{ quiz.name }}
-              <mat-icon>close</mat-icon>
-            </button>
-          </mat-list-item>
-        </mat-list>
+        <mat-list-item *ngFor="let quiz of course.quizs; index as quizIndex">
+          <button mat-button (click)="onDeleteQuiz(quizIndex)">{{ quiz.name }}
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
     </mat-card-content>
   </mat-card>
 </div>
