@@ -5,7 +5,7 @@
     <mat-card-title>
       <mat-form-field class="full-width">
         <input matInput placeholder="Name des Tests" [formControl]="quiznameFormControl"
-        [errorStateMatcher]="quiznameMatcher" [(ngModel)]="quiz.name" (change)="onUpdateQuizTitle($event)">
+               [errorStateMatcher]="quiznameMatcher" [(ngModel)]="quiz.name" (change)="onUpdateQuizTitle($event)">
       </mat-form-field>
     </mat-card-title>
 
@@ -30,7 +30,7 @@
       <mat-card-title>
         <mat-form-field class="full-width">
           <input matInput placeholder="Frage" [formControl]="questionFormControl"
-          [errorStateMatcher]="questionMatcher" [(ngModel)]="question.questionText"
+                 [errorStateMatcher]="questionMatcher" [(ngModel)]="question.questionText"
                  (change)="onUpdateQuestion($event, questionIndex)">
         </mat-form-field>
       </mat-card-title>
@@ -39,13 +39,13 @@
           <mat-checkbox (change)="onUpdateChecked($event, questionIndex, answerIndex)">
             <mat-form-field>
               <input class="answerText" matInput placeholder="Antwort" [formControl]="answerFormControl"
-              [errorStateMatcher]="answerMatcher" [ngModel]="answer"
+                     [errorStateMatcher]="answerMatcher" value="{{answer}}"
                      (change)="onUpdateAnswer($event, questionIndex, answerIndex)">
             </mat-form-field>
           </mat-checkbox>
         </span>
       </mat-card-content>
-        <span class="done" (click)="deleteQuestion(questionIndex)">
+      <span class="done" (click)="deleteQuestion(questionIndex)">
             <button mat-fab>
               <mat-icon>delete circle</mat-icon>
             </button>
@@ -64,8 +64,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button color="primary" (click)="onSave()" 
-  [disabled]="quiznameFormControl.invalid || questionFormControl.invalid || answerFormControl.invalid">
+  <button mat-button color="primary" (click)="onSave()"
+          [disabled]="quiznameFormControl.invalid || questionFormControl.invalid || answerFormControl.invalid">
     Test speichern
   </button>
   <!-- Can optionally provide a result for the closing dialog. -->
