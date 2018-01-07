@@ -197,6 +197,7 @@ export class AddCourseComponent implements OnInit {
     this.userDialog.open(AddUserDialogComponent, {
       width: '80%',
       height: '85%',
+      autoFocus: false,
       data: this.course.users
     }).afterClosed().subscribe(result => {
       if (result !== true) {
