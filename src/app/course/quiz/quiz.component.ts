@@ -81,6 +81,9 @@ export class QuizComponent implements OnInit, OnDestroy {
       }
     ).subscribe((message: Message) => {
       if (message.status === Status.SUCCESS) {
+        this.snackBar.open(message.data as string, '', {
+          duration: 3500,
+        });
         this.router.navigate(['courses']);
       } else {
         this.snackBar.open((message.data as Error).message, '', {

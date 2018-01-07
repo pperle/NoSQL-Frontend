@@ -140,6 +140,9 @@ export class AddCourseComponent implements OnInit {
     this.http.post('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/courses/', this.course)
       .subscribe((message: Message) => {
         if (message.status === Status.SUCCESS) {
+          this.snackBar.open(message.data as string, '', {
+            duration: 3500,
+          });
           this.router.navigate(['courses']);
         } else {
           this.snackBar.open((message.data as Error).message, '', {
