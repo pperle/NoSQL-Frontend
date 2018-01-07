@@ -72,11 +72,17 @@ export class AddQuizDialogComponent implements OnInit {
 
   public onSave() {
     if (this.everyQuestionHasAtLeastOneCorrectAnswer()) {
-      this.matDialogRef.close(this.quiz);
-    } else {
-        this.snackBar.open('Jede Frage benötigt mindestens eine korrekte Antwort', '', {
+      if (this.quiz.questions.length === 0) {
+        this.snackBar.open('Der Test benötigt MINDESTENS EINE Frage!', '', {
           duration: 4000,
         });
+      } else {
+        this.matDialogRef.close(this.quiz);
+      }
+    } else {
+      this.snackBar.open('Jede Frage benötigt MINDESTENS EINE korrekte Antwort', '', {
+        duration: 4000,
+      });
     }
   }
 
