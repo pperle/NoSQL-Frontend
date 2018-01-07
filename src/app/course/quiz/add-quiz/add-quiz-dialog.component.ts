@@ -99,6 +99,7 @@ export class AddQuizDialogComponent implements OnInit {
 
   onUpdateVisibilityStartDate(event: MatDatepickerInputEvent<Date>) {
     const newDate = event.target.value;
+    this.correctTimezoneOffset(newDate);
     this.quiz.visibilityStartDate = newDate;
     if (this.quiz.visibilityEndDate && this.quiz.visibilityEndDate < newDate) {
       this.quiz.visibilityEndDate = newDate;
@@ -107,11 +108,20 @@ export class AddQuizDialogComponent implements OnInit {
 
   onUpdateVisibilityEndDate(event: MatDatepickerInputEvent<Date>) {
     const newDate = event.target.value;
+    this.correctTimezoneOffset(newDate);
     if (newDate < this.quiz.visibilityStartDate) {
       this.quiz.visibilityEndDate = this.quiz.visibilityStartDate;
     } else {
       this.quiz.visibilityEndDate = newDate;
     }
+  }
+
+  correctTimezoneOffset(date: Date) {
+      const offsetInMinutes: number = date.getTimezoneOffset();
+      const offsetInHours: number = offsetInMinutes/60;
+      const offsetCompensation: number = -1*offsetInHours*60*60*1000;
+
+      date.setTime(date.getTime()+offsetCompensation);
   }
 
   notBeforeToday(d: Date) {
