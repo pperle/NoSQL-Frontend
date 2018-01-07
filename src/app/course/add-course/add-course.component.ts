@@ -195,6 +195,7 @@ export class AddCourseComponent implements OnInit {
 
   onAddUserToCourse() {
     this.userDialog.open(AddUserDialogComponent, {
+      autoFocus: false,
       data: this.course.users
     }).afterClosed().subscribe(result => {
       if (result !== true) {

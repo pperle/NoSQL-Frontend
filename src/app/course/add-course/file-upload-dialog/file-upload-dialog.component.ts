@@ -52,18 +52,20 @@ export class FileUploadDialogComponent implements OnInit {
 
 
    notBeforeToday(d: Date) {
-     const today = new Date();
-     return d >= today;
-   }
+    const today = new Date();
+    const referenceDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    return d >= referenceDate;
+  }
 
-   notBeforeStartDate(d: Date) {
-     if (this.file) {
-       return d >= this.file.visibilityStartDate;
-     } else {
-       const today = new Date();
-       return d >= today;
-     }
-   }
+  notBeforeStartDate(d: Date) {
+    if (this.file) {
+      return d >= this.file.visibilityStartDate;
+    } else {
+      const today = new Date();
+      const referenceDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      return d >= referenceDate;
+    }
+  }
 
   addData($event) {
     this.file.data = $event.target.value;
@@ -71,8 +73,8 @@ export class FileUploadDialogComponent implements OnInit {
 
   public onSave() {
     const reader = new FileReader();
-    let matDialogRef: MatDialogRef<FileUploadDialogComponent> = this.matDialogRef;
-    let file = this.file;
+    const matDialogRef: MatDialogRef<FileUploadDialogComponent> = this.matDialogRef;
+    const file = this.file;
 
     if (!this.fileData) {
       return;
@@ -81,7 +83,7 @@ export class FileUploadDialogComponent implements OnInit {
     reader.onloadend = function(e: Event) {
         file.data = reader.result;
         matDialogRef.close(file);
-    }
+    };
     reader.readAsDataURL(this.fileData);
   }
 

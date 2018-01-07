@@ -72,11 +72,17 @@ export class AddQuizDialogComponent implements OnInit {
 
   public onSave() {
     if (this.everyQuestionHasAtLeastOneCorrectAnswer()) {
-      this.matDialogRef.close(this.quiz);
-    } else {
-        this.snackBar.open('Jede Frage benötigt mindestens eine korrekte Antwort', '', {
+      if (this.quiz.questions.length === 0) {
+        this.snackBar.open('Der Test benötigt MINDESTENS EINE Frage!', '', {
           duration: 4000,
         });
+      } else {
+        this.matDialogRef.close(this.quiz);
+      }
+    } else {
+      this.snackBar.open('Jede Frage benötigt MINDESTENS EINE korrekte Antwort', '', {
+        duration: 4000,
+      });
     }
   }
 
@@ -110,7 +116,8 @@ export class AddQuizDialogComponent implements OnInit {
 
   notBeforeToday(d: Date) {
     const today = new Date();
-    return d >= today;
+    const referenceDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    return d >= referenceDate;
   }
 
   notBeforeStartDate(d: Date) {
@@ -118,7 +125,8 @@ export class AddQuizDialogComponent implements OnInit {
       return d >= this.quiz.visibilityStartDate;
     } else {
       const today = new Date();
-      return d >= today;
+      const referenceDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      return d >= referenceDate;
     }
   }
 
