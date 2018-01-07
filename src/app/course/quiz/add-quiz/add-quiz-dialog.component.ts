@@ -75,7 +75,7 @@ export class AddQuizDialogComponent implements OnInit {
 
   everyQuestionHasAtLeastOneCorrectAnswer(): boolean {
     let result = true;
-    this.quiz.questions.forEach(element => {    
+    this.quiz.questions.forEach(element => {
       if (element.correctAnwsers.length === 0) {
         result = false;
       }
@@ -90,6 +90,7 @@ export class AddQuizDialogComponent implements OnInit {
     if (this.quiz.visibilityEndDate && this.quiz.visibilityEndDate < newDate) {
       this.quiz.visibilityEndDate = newDate;
     }
+    console.log(this.quiz.visibilityStartDate);
   }
 
   onUpdateVisibilityEndDate(event: MatDatepickerInputEvent<Date>) {
