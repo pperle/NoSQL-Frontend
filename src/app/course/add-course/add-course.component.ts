@@ -93,7 +93,9 @@ export class AddCourseComponent implements OnInit {
   }
 
   openQuizDialog() {
-    this.quizDialog.open(AddQuizDialogComponent).afterClosed().subscribe(result => {
+    this.quizDialog.open(AddQuizDialogComponent, {
+      autoFocus: false
+    }).afterClosed().subscribe(result => {
       if (result) {
         if (result !== true) {
           this.course.quizs.push(result);
@@ -174,6 +176,7 @@ export class AddCourseComponent implements OnInit {
 
   onUploadFile($event, topicIndex) {
     this.fileDialog.open(FileUploadDialogComponent, {
+      autoFocus: false,
       disableClose: true
     }).afterClosed().subscribe(result => {
       if (result !== true) {
