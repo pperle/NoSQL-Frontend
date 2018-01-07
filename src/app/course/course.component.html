@@ -25,7 +25,7 @@
           </button>
           <div *ngIf="this.sessionDataManagerService.user.level == 'PROFESSOR'">
 
-            <div class="example-container mat-elevation-z8">
+            <div class="table-container mat-elevation-z8">
               <mat-table [dataSource]="this.quizUserResultMap.get(quiz._id)">
                 <!-- User Column -->
                 <ng-container matColumnDef="user">
