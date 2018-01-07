@@ -20,6 +20,7 @@ import { AddCourseComponent } from './course/add-course/add-course.component';
 import { HttpLoginService } from './shared/services/http-login.service';
 import { FileUploadDialogComponent } from './course/add-course/file-upload-dialog/file-upload-dialog.component';
 import { AddUserDialogComponent } from './course/add-course/add-user-dialog/add-user-dialog.component';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { AddUserDialogComponent } from './course/add-course/add-user-dialog/add-
   providers: [
     SessionDataManagerService,
     LoginGuard,
-    HttpLoginService
+    HttpLoginService,
+    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
   ],
   bootstrap: [AppComponent],
   entryComponents: [FileUploadDialogComponent, AddUserDialogComponent]
