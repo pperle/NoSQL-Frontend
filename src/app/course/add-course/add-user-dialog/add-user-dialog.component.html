@@ -1,6 +1,6 @@
 <h1 matDialogTitle>Fügen Sie Nutzer hinzu</h1>
 <mat-dialog-content>
-  <mat-card>
+  <mat-card class="mat-elevation-z8" style="margin-bottom: 20px;">
     <mat-card-content>
       <mat-selection-list #selectedUsers *ngIf="users && users.length !== 0">
         <mat-list-option *ngFor="let user of users; index as userIndex" value="{{user}}">
