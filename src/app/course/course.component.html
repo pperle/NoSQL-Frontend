@@ -1,52 +1,50 @@
-<div>
-  <mat-card *ngIf="course">
-    <mat-card-title>{{course.name}}</mat-card-title>
-    <mat-card-content>
-      <mat-card *ngFor="let topic of course.topics">
-        <mat-card-title>{{topic.name}}</mat-card-title>
-        <mat-card-content>
-          <div innerHTML="{{convertNewLineToHTML(topic.description)}}"></div>
-          <hr>
-          <div *ngIf="topic.files.length > 0">
-            <div *ngFor="let file of topic.files">
-              <button mat-raised-button color="primary" (click)="downloadFile(file)">{{file.name}}</button>
-            </div>
+<mat-card *ngIf="course" class="mat-elevation-z6" style="margin: 15px">
+  <mat-card-title>{{course.name}}</mat-card-title>
+  <mat-card-content>
+    <mat-card class="mat-elevation-z7" *ngFor="let topic of course.topics">
+      <mat-card-title>{{topic.name}}</mat-card-title>
+      <mat-card-content>
+        <div innerHTML="{{convertNewLineToHTML(topic.description)}}"></div>
+        <hr>
+        <div *ngIf="topic.files.length > 0">
+          <div *ngFor="let file of topic.files">
+            <button mat-raised-button color="primary" (click)="downloadFile(file)">{{file.name}}</button>
           </div>
-          <div *ngIf="topic.files.length == 0">
-            <p>Dieses Thema enthält keine Dateien</p>
+        </div>
+        <div *ngIf="topic.files.length == 0">
+          <p>Dieses Thema enthält keine Dateien</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="mat-elevation-z7" *ngFor="let quiz of course.quizs">
+      <mat-card-title>{{quiz.name}}</mat-card-title>
+      <mat-card-content>
+        <button *ngIf="this.sessionDataManagerService.user.level == 'STUDENT'" mat-raised-button color="primary"
+                (click)="loadQuiz(quiz._id)">Test starten
+        </button>
+        <div *ngIf="this.sessionDataManagerService.user.level == 'PROFESSOR'">
+
+          <div class="table-container mat-elevation-z8">
+            <mat-table [dataSource]="this.quizUserResultMap.get(quiz._id)">
+              <!-- User Column -->
+              <ng-container matColumnDef="user">
+                <mat-header-cell *matHeaderCellDef>User</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.user_id}}</mat-cell>
+              </ng-container>
+
+              <!-- Points Column -->
+              <ng-container matColumnDef="points">
+                <mat-header-cell *matHeaderCellDef>Punkte</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.points}}</mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
           </div>
-        </mat-card-content>
-      </mat-card>
-      <mat-card *ngFor="let quiz of course.quizs">
-        <mat-card-title>{{quiz.name}}</mat-card-title>
-        <mat-card-content>
-          <button *ngIf="this.sessionDataManagerService.user.level == 'STUDENT'" mat-raised-button color="primary"
-                  (click)="loadQuiz(quiz._id)">Test starten
-          </button>
-          <div *ngIf="this.sessionDataManagerService.user.level == 'PROFESSOR'">
 
-            <div class="table-container mat-elevation-z8">
-              <mat-table [dataSource]="this.quizUserResultMap.get(quiz._id)">
-                <!-- User Column -->
-                <ng-container matColumnDef="user">
-                  <mat-header-cell *matHeaderCellDef>User</mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.user_id}}</mat-cell>
-                </ng-container>
-
-                <!-- Points Column -->
-                <ng-container matColumnDef="points">
-                  <mat-header-cell *matHeaderCellDef>Punkte</mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.points}}</mat-cell>
-                </ng-container>
-
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-              </mat-table>
-            </div>
-
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </mat-card-content>
-  </mat-card>
-</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>

@@ -1,27 +1,26 @@
-<div>
-  <mat-card>
-    <mat-card-title (click)="redirectToCourse(2)">Bitte wähle einen Kurs aus</mat-card-title>
-    <mat-card-content>
+<mat-card class="mat-elevation-z8" style="margin: 15px">
+  <mat-card-title>Bitte wähle einen Kurs aus</mat-card-title>
+  <mat-card-content>
 
-      <div *ngIf="courses">
-        <mat-card *ngFor="let course of courses; index as courseIndex" (click)="redirectToCourse(courseIndex)" class="pointer">
-          <mat-card-title>{{course.name}}</mat-card-title>
-        </mat-card>
-      </div>
+    <div *ngIf="courses">
+      <mat-card *ngFor="let course of courses; index as courseIndex"
+                style="margin-bottom: 10px" (click)="redirectToCourse(courseIndex)" class="pointer mat-elevation-z4">
+        <mat-card-title>{{course.name}}</mat-card-title>
+      </mat-card>
+    </div>
 
 
-      <div *ngIf="!courses">
-        <mat-card>
-          <mat-card-title>Kein Kurs gefunden.</mat-card-title>
-          <mat-card-content>
-            <p>Du hast bisher noch keine Kurse.</p>
-          </mat-card-content>
-        </mat-card>
-      </div>
+    <div *ngIf="!courses">
+      <mat-card>
+        <mat-card-title>Kein Kurs gefunden.</mat-card-title>
+        <mat-card-content>
+          <p>Du hast bisher noch keine Kurse.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
 
-    </mat-card-content>
-  </mat-card>
-</div>
+  </mat-card-content>
+</mat-card>
 
 
 <span class="done"
