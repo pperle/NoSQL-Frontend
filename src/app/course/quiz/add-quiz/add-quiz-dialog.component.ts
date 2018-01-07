@@ -85,17 +85,14 @@ export class AddQuizDialogComponent implements OnInit {
 
   onUpdateVisibilityStartDate(event: MatDatepickerInputEvent<Date>) {
     const newDate = event.target.value;
-    this.correctTimezoneOffset(newDate);
     this.quiz.visibilityStartDate = newDate;
     if (this.quiz.visibilityEndDate && this.quiz.visibilityEndDate < newDate) {
       this.quiz.visibilityEndDate = newDate;
     }
-    console.log(this.quiz.visibilityStartDate);
   }
 
   onUpdateVisibilityEndDate(event: MatDatepickerInputEvent<Date>) {
     const newDate = event.target.value;
-    this.correctTimezoneOffset(newDate);
     if (newDate < this.quiz.visibilityStartDate) {
       this.quiz.visibilityEndDate = this.quiz.visibilityStartDate;
     } else {

@@ -5,16 +5,16 @@
       <mat-form-field>
         <mat-placeholder>Sichtbar von</mat-placeholder>
         <mat-datetimepicker-toggle [for]="startDate" matSuffix></mat-datetimepicker-toggle>
-        <mat-datetimepicker #startDate type="datetime" timeInterval="5"></mat-datetimepicker>
+        <mat-datetimepicker #startDate type="datetime"  openOnFocus="true" timeInterval="1"></mat-datetimepicker>
         <input matInput [matDatepickerFilter]="notBeforeToday" [(ngModel)]="file.visibilityStartDate" 
-        [matDatetimepicker]="startDate" (dateChange)="onUpdateVisibilityStartDate($event)" autocomplete="false">
+        [matDatetimepicker]="startDate" (dateChange)="onUpdateVisibilityStartDate($event)" autocomplete="false" readonly>
       </mat-form-field>
       <mat-form-field>
         <mat-placeholder>Sichtbar bis</mat-placeholder>
         <mat-datetimepicker-toggle [for]="endDate" matSuffix></mat-datetimepicker-toggle>
-        <mat-datetimepicker #endDate type="datetime" timeInterval="5"></mat-datetimepicker>
+        <mat-datetimepicker #endDate type="datetime" openOnFocus="true" timeInterval="1"></mat-datetimepicker>
         <input matInput [matDatepickerFilter]="notBeforeStartDate" [(ngModel)]="file.visibilityEndDate" 
-        [matDatetimepicker]="endDate" (dateChange)="onUpdateVisibilityEndDate($event)" autocomplete="false">
+        [matDatetimepicker]="endDate" (dateChange)="onUpdateVisibilityEndDate($event)" autocomplete="false" readonly>
       </mat-form-field>
     </mat-card-content>
   </mat-card>
