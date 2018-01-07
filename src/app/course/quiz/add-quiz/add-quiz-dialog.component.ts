@@ -110,7 +110,8 @@ export class AddQuizDialogComponent implements OnInit {
 
   notBeforeToday(d: Date) {
     const today = new Date();
-    return d >= today;
+    const referenceDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    return d >= referenceDate;
   }
 
   notBeforeStartDate(d: Date) {
@@ -118,7 +119,8 @@ export class AddQuizDialogComponent implements OnInit {
       return d >= this.quiz.visibilityStartDate;
     } else {
       const today = new Date();
-      return d >= today;
+      const referenceDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      return d >= referenceDate;
     }
   }
 
