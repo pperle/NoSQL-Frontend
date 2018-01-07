@@ -54,13 +54,25 @@
           </button>
         </div>
       </mat-card>
-      <mat-list>
-        <mat-list-item *ngFor="let quiz of course.quizs; index as quizIndex">
-          <button mat-button (click)="onDeleteQuiz(quizIndex)">{{ quiz.name }}
-            <mat-icon>close</mat-icon>
-          </button>
-        </mat-list-item>
-      </mat-list>
+
+
+      <mat-card *ngIf="course.quizs.length !== 0">
+        <mat-card-title>
+          Tests
+        </mat-card-title>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item *ngFor="let quiz of course.quizs; index as quizIndex">
+              {{ quiz.name }}
+              <button mat-button (click)="onDeleteQuiz(quizIndex)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+
+
     </mat-card-content>
   </mat-card>
 </div>
