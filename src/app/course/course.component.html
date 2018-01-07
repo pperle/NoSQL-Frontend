@@ -5,7 +5,7 @@
       <mat-card *ngFor="let topic of course.topics">
         <mat-card-title>{{topic.name}}</mat-card-title>
         <mat-card-content>
-          <p>{{topic.description}}</p>
+          <div innerHTML="{{convertNewLineToHTML(topic.description)}}"></div>
           <hr>
           <div *ngIf="topic.files.length > 0">
             <div *ngFor="let file of topic.files">

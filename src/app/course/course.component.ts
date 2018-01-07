@@ -74,4 +74,8 @@ export class CourseComponent implements OnInit, OnDestroy {
     window.open('http://localhost:3000/users/' + this.sessionDataManagerService.user._id + '/courses/' + this.course._id
       + '/files/' + file._id + '/token/' + this.sessionDataManagerService.user.token);
   }
+
+  convertNewLineToHTML(description: string) {
+    return description.replace(new RegExp('\n', 'g'), '<br />');
+  }
 }
