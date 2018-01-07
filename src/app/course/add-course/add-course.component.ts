@@ -202,7 +202,7 @@ export class AddCourseComponent implements OnInit {
       autoFocus: false,
       data: this.course.users
     }).afterClosed().subscribe(result => {
-      if (result !== true) {
+      if (result !== true && result != null) {         
         this.course.users = result;
       }
     });
