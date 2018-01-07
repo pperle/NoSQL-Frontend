@@ -42,6 +42,7 @@ export class FileUploadDialogComponent implements OnInit {
      this.correctTimezoneOffset(newDate);
      if (newDate < this.file.visibilityStartDate) {
        this.file.visibilityEndDate = this.file.visibilityStartDate;
+       this.file.visibilityStartDate = newDate;
      } else {
        this.file.visibilityEndDate = newDate;
      }
