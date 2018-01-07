@@ -30,6 +30,7 @@ export class FileUploadDialogComponent implements OnInit {
 
   onUpdateVisibilityStartDate(event: MatDatepickerInputEvent<Date>) {
       const newDate = event.target.value;
+      this.correctTimezoneOffset(newDate);
       this.file.visibilityStartDate = newDate;
       if (this.file.visibilityEndDate && this.file.visibilityEndDate < newDate) {
         this.file.visibilityEndDate = newDate;
@@ -38,11 +39,20 @@ export class FileUploadDialogComponent implements OnInit {
 
    onUpdateVisibilityEndDate(event: MatDatepickerInputEvent<Date>) {
      const newDate = event.target.value;
+     this.correctTimezoneOffset(newDate);
      if (newDate < this.file.visibilityStartDate) {
        this.file.visibilityEndDate = this.file.visibilityStartDate;
      } else {
        this.file.visibilityEndDate = newDate;
      }
+   }
+
+   correctTimezoneOffset(date: Date) {
+       const offsetInMinutes: number = date.getTimezoneOffset();
+       const offsetInHours: number = offsetInMinutes/60;
+       const offsetCompensation: number = -1*offsetInHours*60*60*1000;
+
+       date.setTime(date.getTime()+offsetCompensation);
    }
 
    readSingleFile($event) {
