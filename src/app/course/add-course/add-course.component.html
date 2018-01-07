@@ -3,16 +3,16 @@
     <mat-card-title>
       <mat-form-field class="full-width">
         <input matInput placeholder="Kursname" [formControl]="courseFormControl"
-        [errorStateMatcher]="courseTitleMatcher" [(ngModel)]="course.name" (change)="onUpdateCourseName($event)">
+               [errorStateMatcher]="courseTitleMatcher" value="{{course.name}}" (change)="onUpdateCourseName($event)">
         <mat-error *ngIf="courseFormControl.hasError('required')">
-            Ein Kursname wird <strong>benötigt</strong>.
-          </mat-error>
+          Ein Kursname wird <strong>benötigt</strong>.
+        </mat-error>
       </mat-form-field>
     </mat-card-title>
     <mat-card>
       <mat-card-title>
-          Liste aller Nutzer in diesem Kurs
-          <button mat-raised-button (click)="onAddUserToCourse()">Nutzer hinzufügen</button>
+        Liste aller Nutzer in diesem Kurs
+        <button mat-raised-button (click)="onAddUserToCourse()">Nutzer hinzufügen</button>
       </mat-card-title>
       <mat-card-content>
         <label *ngFor="let user of course.users; index as userIndex">
@@ -26,17 +26,13 @@
       <mat-card *ngFor="let topic of course.topics; index as topicIndex">
         <mat-card-title>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Titel" [formControl]="topicFormControl"
-            [errorStateMatcher]="topicMatcher" [(ngModel)]="topic.name"
+            <input matInput placeholder="Titel" value="{{topic.name}}"
                    (change)="onUpdateTopicTitle($event, topicIndex)">
-                   <mat-error *ngIf="topicFormControl.hasError('required')">
-                      Ein Titel für das Thema wird <strong>benötigt</strong>.
-                    </mat-error>
           </mat-form-field>
         </mat-card-title>
         <mat-card-content>
           <mat-form-field class="full-width">
-            <textarea matInput placeholder="Beschreibung" [(ngModel)]="topic.description"
+            <textarea matInput placeholder="Beschreibung" value="{{topic.description}}"
                       (change)="onUpdateTopicDescription($event, topicIndex)"></textarea>
           </mat-form-field>
           <mat-list>

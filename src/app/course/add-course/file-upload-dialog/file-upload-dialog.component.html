@@ -1,26 +1,26 @@
 <h1 matDialogTitle>Fügen Sie eine Datei hinzu</h1>
 <mat-dialog-content>
-<mat-card>
-    <mat-card-content>        
-        <mat-form-field>
-                <input matInput [matDatepickerFilter]="notBeforeToday" [matDatepicker]="startDate" placeholder="MM/TT/JJJJ"
-                [(ngModel)]="file.visibilityStartDate" (dateChange)="onUpdateVisibilityStartDate($event)" readonly>
-                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
-                <mat-datepicker #startDate></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field>
-                <input matInput [matDatepickerFilter]="notBeforeStartDate" [matDatepicker]="endDate" placeholder="MM/TT/JJJJ"
-                [(ngModel)]="file.visibilityEndDate" (dateChange)="onUpdateVisibilityEndDate($event)" readonly>
-                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
-                <mat-datepicker #endDate></mat-datepicker>
-        </mat-form-field>
+  <mat-card>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput [matDatepickerFilter]="notBeforeToday" [matDatepicker]="startDate" placeholder="MM/TT/JJJJ"
+               [(ngModel)]="file.visibilityStartDate" (dateChange)="onUpdateVisibilityStartDate($event)" readonly>
+        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepickerFilter]="notBeforeStartDate" [matDatepicker]="endDate" placeholder="MM/TT/JJJJ"
+               [(ngModel)]="file.visibilityEndDate" (dateChange)="onUpdateVisibilityEndDate($event)" readonly>
+        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+      </mat-form-field>
     </mat-card-content>
-</mat-card>
-<br>
-<input type="file" id="file-input" (change)="readSingleFile($event)"/>
+  </mat-card>
+  <br>
+  <input type="file" id="file-input" (change)="readSingleFile($event)"/>
 </mat-dialog-content>
-    <mat-dialog-actions>
-        <button mat-button style="left: 65%" mat-dialog-close (click)="onSave()">Datei speichern</button>
-            <!-- Can optionally provide a result for the closing dialog. -->
-        <button mat-button style="left: 70%" [mat-dialog-close]="true">Abbrechen</button>
-    </mat-dialog-actions>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onSave()">Datei speichern</button>
+  <!-- Can optionally provide a result for the closing dialog. -->
+  <button mat-button [mat-dialog-close]="true">Abbrechen</button>
+</mat-dialog-actions>

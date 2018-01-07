@@ -22,11 +22,6 @@ export class AddCourseComponent implements OnInit {
   buttons: Array<Ng2FloatBtn>;
   newFileName = '';
 
-  topicFormControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(1)
-  ]);
-
   courseFormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(1)
@@ -98,10 +93,7 @@ export class AddCourseComponent implements OnInit {
   }
 
   openQuizDialog() {
-    this.quizDialog.open(AddQuizDialogComponent, {
-      width: '75%',
-      height: '85%'
-    }).afterClosed().subscribe(result => {
+    this.quizDialog.open(AddQuizDialogComponent).afterClosed().subscribe(result => {
       if (result) {
         if (result !== true) {
           this.course.quizs.push(result);
@@ -111,23 +103,30 @@ export class AddCourseComponent implements OnInit {
   }
 
   checkValidationBeforeSending() {
-    if (this.courseFormControl.invalid || this.topicFormControl.invalid) {
+    if (this.courseFormControl.invalid) {
       this.throwCorrectSnackBarMessage();
     } else {
-      this.sendCourse();
+      if (this.course.topics.length === 0) {
+        this.snackBar.open('Es wird mindestens ein Thema benötig.', '', {
+          duration: 3500,
+        });
+      } else {
+        const allTopicsHaveAName = this.course.topics
+          .filter(topic => topic.name.trim().length === 0)
+          .length === 0;
+        if (!allTopicsHaveAName) {
+          this.snackBar.open('Alle Themen benötigen einen Titel.', '', {
+            duration: 3500,
+          });
+        } else {
+          this.sendCourse();
+        }
+      }
     }
   }
 
   throwCorrectSnackBarMessage() {
-    if (this.courseFormControl.invalid && this.topicFormControl.invalid) {
-      this.snackBar.open('Ein Titel zum Thema und ein Kursname wird benötig', '', {
-        duration: 3500,
-      });
-    } else if (this.topicFormControl.invalid) {
-      this.snackBar.open('Ein Titel zum Thema wird benötig', '', {
-        duration: 3500,
-      });
-    } else {
+    if (this.courseFormControl.invalid) {
       this.snackBar.open('Ein Kursname wird benötig', '', {
         duration: 3500,
       });
@@ -155,6 +154,10 @@ export class AddCourseComponent implements OnInit {
   }
 
   onUpdateTopicTitle($event, topicIndex: number) {
+    console.log(this.course.topics);
+
+
+    console.log(topicIndex, $event);
     this.course.topics[topicIndex].name = $event.target.value;
   }
 
@@ -171,10 +174,7 @@ export class AddCourseComponent implements OnInit {
   }
 
   onUploadFile($event, topicIndex) {
-    this.fileDialog.open(FileUploadDialogComponent, {
-      width: '80%',
-      height: '85%'
-    }).afterClosed().subscribe(result => {
+    this.fileDialog.open(FileUploadDialogComponent).afterClosed().subscribe(result => {
       if (result !== true) {
         this.course.topics[topicIndex].files.push(result);
       }
@@ -195,8 +195,6 @@ export class AddCourseComponent implements OnInit {
 
   onAddUserToCourse() {
     this.userDialog.open(AddUserDialogComponent, {
-      width: '80%',
-      height: '85%',
       data: this.course.users
     }).afterClosed().subscribe(result => {
       if (result !== true) {
