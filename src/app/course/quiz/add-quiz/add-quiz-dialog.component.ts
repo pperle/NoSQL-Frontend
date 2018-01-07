@@ -75,8 +75,7 @@ export class AddQuizDialogComponent implements OnInit {
 
   everyQuestionHasAtLeastOneCorrectAnswer(): boolean {
     let result = true;
-    this.quiz.questions.forEach(element => {
-      console.log(element.correctAnwsers.length);
+    this.quiz.questions.forEach(element => {    
       if (element.correctAnwsers.length === 0) {
         result = false;
       }

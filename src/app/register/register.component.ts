@@ -38,12 +38,6 @@ export class RegisterComponent {
 
   register(id: string, password: string) {
 
-    console.log({
-      id: id,
-      password: Md5.hashStr(password),
-      level: this.userLevel
-    });
-
     this.http.post('http://localhost:3000/users/register/',
       {
         id: id,

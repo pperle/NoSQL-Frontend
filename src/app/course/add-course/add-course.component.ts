@@ -156,11 +156,7 @@ export class AddCourseComponent implements OnInit {
     this.course.name = $event.target.value;
   }
 
-  onUpdateTopicTitle($event, topicIndex: number) {
-    console.log(this.course.topics);
-
-
-    console.log(topicIndex, $event);
+  onUpdateTopicTitle($event, topicIndex: number) {    
     this.course.topics[topicIndex].name = $event.target.value;
   }
 
