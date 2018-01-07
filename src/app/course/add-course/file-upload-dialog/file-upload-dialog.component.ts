@@ -76,10 +76,6 @@ export class FileUploadDialogComponent implements OnInit {
     const matDialogRef: MatDialogRef<FileUploadDialogComponent> = this.matDialogRef;
     const file = this.file;
 
-    if (!this.fileData) {
-      return;
-    }
-
     reader.onloadend = function(e: Event) {
         file.data = reader.result;
         matDialogRef.close(file);

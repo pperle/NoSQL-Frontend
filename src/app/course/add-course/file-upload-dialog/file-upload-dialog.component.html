@@ -20,7 +20,7 @@
   <input type="file" id="file-input" (change)="readSingleFile($event)"/>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="onSave()">Datei speichern</button>
+  <button mat-button color="primary" [disabled]="!fileData" (click)="onSave()">Datei speichern</button>
   <!-- Can optionally provide a result for the closing dialog. -->
-  <button mat-button [mat-dialog-close]="true">Abbrechen</button>
+  <button mat-button color="warn" [mat-dialog-close]="true">Abbrechen</button>
 </mat-dialog-actions>

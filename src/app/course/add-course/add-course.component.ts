@@ -174,7 +174,9 @@ export class AddCourseComponent implements OnInit {
   }
 
   onUploadFile($event, topicIndex) {
-    this.fileDialog.open(FileUploadDialogComponent).afterClosed().subscribe(result => {
+    this.fileDialog.open(FileUploadDialogComponent, {
+      disableClose: true
+    }).afterClosed().subscribe(result => {
       if (result !== true) {
         this.course.topics[topicIndex].files.push(result);
       }
