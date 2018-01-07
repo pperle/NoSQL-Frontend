@@ -13,23 +13,10 @@ export class AddQuizDialogComponent implements OnInit {
 
   quiz: NewQuiz;
 
-  questionFormControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(1)
-  ]);
-
-  answerFormControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(1)
-  ]);
-
   quiznameFormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(1)
   ]);
-
-  questionMatcher = new MyErrorStateMatcher();
-  answerMatcher = new MyErrorStateMatcher();
   quiznameMatcher = new MyErrorStateMatcher();
 
   constructor(@Optional() @Inject(MAT_DIALOG_DATA) private dialogData: any,
@@ -140,7 +127,7 @@ export class AddQuizDialogComponent implements OnInit {
     }
   }
 
-  onUpdateChecked($event, questionIndex: number, answerIndex: number, ) {
+  onUpdateChecked($event, questionIndex: number, answerIndex: number) {
     if ($event.checked) {
       this.quiz.questions[questionIndex].correctAnwsers.push(answerIndex);
     } else if ($event.checked === false) {
@@ -159,4 +146,21 @@ export class AddQuizDialogComponent implements OnInit {
     this.quiz.questions.splice(questionIndex, 1);
   }
 
+  isTestValid(): boolean {
+    return this.quiznameFormControl.invalid || !this.areAllCorrectAnswersSet() || this.areAllTitlesEmpty();
+  }
+
+  private areAllTitlesEmpty(): boolean {
+    return this.quiz.questions
+      .filter(question => {
+        return question.questionText.trim().length === 0;
+      }).length !== 0;
+  }
+
+  private areAllCorrectAnswersSet(): boolean {
+    return this.quiz.questions
+      .filter(question => {
+        return question.correctAnwsers.length === 0;
+      }).length === 0;
+  }
 }

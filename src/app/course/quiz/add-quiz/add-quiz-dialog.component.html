@@ -5,7 +5,7 @@
     <mat-card-title>
       <mat-form-field class="full-width">
         <input matInput placeholder="Name des Tests" [formControl]="quiznameFormControl"
-               [errorStateMatcher]="quiznameMatcher" [(ngModel)]="quiz.name" (change)="onUpdateQuizTitle($event)">
+               [errorStateMatcher]="quiznameMatcher" value="{{quiz.name}}" (change)="onUpdateQuizTitle($event)">
       </mat-form-field>
     </mat-card-title>
 
@@ -29,8 +29,7 @@
     <mat-card *ngFor="let question of quiz.questions; index as questionIndex">
       <mat-card-title>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Frage" [formControl]="questionFormControl"
-                 [errorStateMatcher]="questionMatcher" [(ngModel)]="question.questionText"
+          <input matInput placeholder="Frage" value="{{question.questionText}}"
                  (change)="onUpdateQuestion($event, questionIndex)">
         </mat-form-field>
       </mat-card-title>
@@ -38,8 +37,7 @@
         <span *ngFor="let answer of question.possibleAnwsers; index as answerIndex">
           <mat-checkbox (change)="onUpdateChecked($event, questionIndex, answerIndex)">
             <mat-form-field>
-              <input class="answerText" matInput placeholder="Antwort" [formControl]="answerFormControl"
-                     [errorStateMatcher]="answerMatcher" value="{{answer}}"
+              <input class="answerText" matInput placeholder="Antwort" value="{{answer}}"
                      (change)="onUpdateAnswer($event, questionIndex, answerIndex)">
             </mat-form-field>
           </mat-checkbox>
@@ -65,7 +63,7 @@
 
 <mat-dialog-actions>
   <button mat-button color="primary" (click)="onSave()"
-          [disabled]="quiznameFormControl.invalid || questionFormControl.invalid || answerFormControl.invalid">
+          [disabled]="isTestValid()">
     Test speichern
   </button>
   <!-- Can optionally provide a result for the closing dialog. -->
